@@ -1,102 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ROVEX CARD</title>
-  <meta name="description" content="ROVEX CARD — منصة رقمية للشحن والبطاقات.">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROVEX CARD | متجر البطاقات الرقمية</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="ROVEX CARD">
-      <span class="brand-mark">R</span><span>ROVEX <b>CARD</b></span>
-    </a>
-    <nav>
-      <a href="#home">الرئيسية</a>
-      <a href="#wallet">المحفظة</a>
-      <a href="#payments">طرق الدفع</a>
-      <a href="#orders">الطلبات</a>
-    </nav>
-    <button class="login-btn" onclick="showNotice('تسجيل الدخول سيُربط بقاعدة البيانات في المرحلة التالية.')">تسجيل الدخول</button>
-  </header>
 
-  <main id="home">
+    <!-- الهيدر والشعار -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">R</span>
+            <span class="logo-text">ROVEX CARD</span>
+        </div>
+        <a href="#products" class="btn-login">المنتجات</a>
+    </header>
+
+    <!-- واجهة الترحيب -->
     <section class="hero">
-      <div class="hero-copy">
-        <div class="pill">ROVEX CARD • DIGITAL STORE</div>
-        <h1>كل شيء رقمي،<br><span>بأسلوب ROVEX.</span></h1>
-        <p>واجهة احترافية جاهزة لمتجر بطاقات وشحن رقمي. لا توجد منتجات حاليًا — سنضيفها لاحقًا بعد تجهيز النظام.</p>
-        <div class="hero-actions">
-          <a class="primary" href="#wallet">ابدأ الآن</a>
-          <a class="secondary" href="#payments">طرق الدفع</a>
+        <h1>كل شيء رقمي، بأسلوب <span class="highlight">ROVEX</span>.</h1>
+        <p>متجرك الموثوق لشحن البطاقات الرقمية والألعاب بسرعة وسهولة.</p>
+    </section>
+
+    <!-- قسم المنتجات الأساسية -->
+    <section id="products" class="products-section">
+        <h2 class="section-title">البطاقات المتاحة</h2>
+        
+        <div class="products-grid">
+            
+            <!-- بطاقة فيزا -->
+            <div class="product-card">
+                <div class="card-tag">حصرية</div>
+                <h3>بطاقة فيزا مشحونة (Visa)</h3>
+                <p class="price">حدد الفئة عند الطلب</p>
+                <p class="desc">مقبولة في جميع المتاجر والشراء عبر الإنترنت.</p>
+                <a href="https://wa.me/?text=مرحباً،%20أرغب%20في%20شراء%20بطاقة%20فيزا" class="btn-buy" target="_blank">اطلب الآن عبر واتساب</a>
+            </div>
+
+            <!-- بطاقة بلايستيشن -->
+            <div class="product-card">
+                <div class="card-tag">الأكثر طلباً</div>
+                <h3>بطاقة بلايستيشن (PlayStation)</h3>
+                <p class="price">حدد الفئة عند الطلب</p>
+                <p class="desc">شحن رصيد ستور بلايستيشن للمتجر الأمريكي والخليجي.</p>
+                <a href="https://wa.me/?text=مرحباً،%20أرغب%20في%20شراء%20بطاقة%20بلايستيشن" class="btn-buy" target="_blank">اطلب الآن عبر واتساب</a>
+            </div>
+
         </div>
-      </div>
-      <div class="hero-card">
-        <div class="card-glow"></div>
-        <div class="mini-logo">R</div>
-        <div class="card-title">ROVEX CARD</div>
-        <div class="card-number">••••  ••••  ••••  ROVX</div>
-        <div class="card-bottom"><span>DIGITAL WALLET</span><span>2026</span></div>
-      </div>
     </section>
 
-    <section class="section" id="wallet">
-      <div class="section-head">
-        <div><span class="eyebrow">WALLET</span><h2>محفظتك في مكان واحد</h2></div>
-        <span class="status">النظام قيد التجهيز</span>
-      </div>
-      <div class="wallet-grid">
-        <div class="wallet-box">
-          <span>الرصيد الحالي</span><strong>$ 0.00</strong>
-          <small>لا يوجد رصيد بعد</small>
-        </div>
-        <div class="wallet-box action">
-          <span>إضافة رصيد</span>
-          <strong>+</strong>
-          <small>سيتم تفعيل الإيداع بعد ربط طرق الدفع والتحقق منها.</small>
-        </div>
-      </div>
-    </section>
+    <!-- الفوتر -->
+    <footer>
+        <p>© 2026 ROVEX CARD - جميع الحقوق محفوظة.</p>
+    </footer>
 
-    <section class="section" id="payments">
-      <div class="section-head">
-        <div><span class="eyebrow">PAYMENTS</span><h2>طرق الدفع</h2></div>
-        <span class="status">جاهزة كواجهة فقط</span>
-      </div>
-      <div class="payment-grid">
-        <button class="payment" onclick="showNotice('بيانات/رصيد: سيتم ربط طريقة الدفع الفعلية لاحقًا.')"><b>بيانا</b><span>رصيد محلي</span></button>
-        <button class="payment" onclick="showNotice('Binance Pay: سيتم ربط بوابة الدفع الرسمية لاحقًا.')"><b>Binance</b><span>دفع رقمي</span></button>
-        <button class="payment" onclick="showNotice('Bybit: سيتم ربط بوابة الدفع الرسمية لاحقًا.')"><b>Bybit</b><span>دفع رقمي</span></button>
-        <button class="payment" onclick="showNotice('Crypto: يمكن إضافة عملات مدعومة بعد تحديد بوابة الدفع والمورد.')"><b>Crypto</b><span>عملات رقمية</span></button>
-      </div>
-      <p class="note">لن يتم تسجيل أو حفظ مفاتيح خاصة أو كلمات مرور محافظ العملاء داخل الموقع. عند التنفيذ الفعلي سنستخدم بوابة دفع/واجهة API موثوقة.</p>
-    </section>
-
-    <section class="section empty" id="products">
-      <div class="empty-icon">✦</div>
-      <h2>المنتجات قريبًا</h2>
-      <p>المتجر حاليًا بدون منتجات كما طلبت. يمكن إضافة البطاقات والشحن لاحقًا من لوحة الإدارة.</p>
-    </section>
-
-    <section class="section" id="orders">
-      <div class="section-head">
-        <div><span class="eyebrow">ORDERS</span><h2>الطلبات</h2></div>
-      </div>
-      <div class="empty orders-empty">
-        <div class="empty-icon">↗</div>
-        <h3>لا توجد طلبات</h3>
-        <p>ستظهر عمليات الشراء هنا بعد تفعيل الحسابات والمنتجات.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div><strong>ROVEX CARD</strong><span>منصة رقمية قيد البناء.</span></div>
-    <span>© 2026 ROVEX CARD</span>
-  </footer>
-
-  <div id="toast" class="toast" role="status"></div>
-  <script src="script.js"></script>
 </body>
 </html>
