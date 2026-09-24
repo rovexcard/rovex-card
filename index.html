@@ -3,182 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROVEX CARD | متجر البطاقات الرقمية والشحن الفوري</title>
+    <title>ROVEX CARD | متجر البطاقات الرقمية المحترف</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* تحسينات إضافية لعرض الصور بطريقة شبيهة بـ LikeCard */
-        .product-card {
-            background: #1e1e2d;
+        :root {
+            --bg-color: #0f1015;
+            --card-bg: #181924;
+            --accent-gold: #f0b90b;
+            --accent-green: #2ed573;
+            --text-main: #ffffff;
+            --text-sub: #a0a5b5;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* الهيدر العلوي والمحفظة */
+        .top-bar {
+            background: #12131c;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-wallet {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(240, 185, 11, 0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(240, 185, 11, 0.3);
+        }
+
+        .wallet-amount {
+            color: var(--accent-gold);
+            font-weight: 900;
+        }
+
+        .btn-topup {
+            background: var(--accent-gold);
+            color: #000;
+            padding: 4px 12px;
             border-radius: 12px;
-            padding: 15px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn-topup:hover {
+            opacity: 0.9;
+        }
+
+        /* رأس الصفحة والملاحظات */
+        .header-main {
+            padding: 20px;
             text-align: center;
+        }
+
+        .brand-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .brand-logo span {
+            color: var(--accent-gold);
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 15px auto;
             position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--card-bg);
+            color: #fff;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        /* أقسام الأقسام الكبيرة (Tabs) */
+        .categories-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .cat-btn {
+            background: var(--card-bg);
+            color: var(--text-sub);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--accent-gold);
+            color: #000;
+            border-color: var(--accent-gold);
+        }
+
+        /* شبكة الكروت المصغرة والمركزة */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card-item {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
             display: flex;
             flex-direction: column;
-            justify: space-between;
+            justify-content: space-between;
         }
-        .product-card:hover {
+
+        .card-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            border-color: rgba(240, 185, 11, 0.4);
         }
-        .product-img {
-            width: 100%;
-            height: 140px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 8px;
-        }
-        .card-tag {
+
+        .card-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 8px;
+            right: 8px;
             background: #ff4757;
-            color: #fff;
-            padding: 3px 8px;
-            font-size: 11px;
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 6px;
             font-weight: bold;
-            border-radius: 4px;
-            z-index: 2;
         }
-        .price-tag {
-            color: #2ed573;
-            font-size: 1.2rem;
+
+        .card-img-container {
+            width: 100%;
+            height: 110px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .card-img-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0px 5px 8px rgba(0,0,0,0.5));
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin: 6px 0;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .card-price {
+            color: var(--accent-green);
             font-weight: 900;
-            margin: 8px 0;
+            font-size: 1rem;
+            margin: 4px 0 10px 0;
+        }
+
+        .btn-buy-now {
+            background: linear-gradient(45deg, #f0b90b, #ff9f1a);
+            color: #000;
+            text-decoration: none;
+            padding: 8px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            display: block;
+            transition: opacity 0.2s;
+        }
+
+        .btn-buy-now:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-sub);
+            font-size: 0.8rem;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر والشعار -->
-    <header class="header">
-        <div class="logo">
-            <span class="logo-icon">R</span>
-            <span class="logo-text">ROVEX CARD</span>
+    <!-- الشريط العلوي: رصيد المحفظة وتسجيل الدخول -->
+    <div class="top-bar">
+        <div class="user-wallet">
+            <span>💳 المحفظة:</span>
+            <span class="wallet-amount">0.00 USDT</span>
+            <a href="#" class="btn-topup">+ شحن</a>
         </div>
-        <a href="#products" class="btn-login">تصفح المنتجات</a>
-    </header>
+        <div style="font-size: 0.8rem; color: #888;">
+            تسليم آلي 24/7 ⚡
+        </div>
+    </div>
 
-    <!-- واجهة الترحيب وطرق الدفع -->
-    <section class="hero">
-        <h1>متجر <span class="highlight">ROVEX CARD</span> الرقمي</h1>
-        <p>شحن فوري وتلقائي 24/7 لكافة البطاقات والألعاب والأرقام الافتراضية</p>
+    <!-- الهيدر والبحث -->
+    <div class="header-main">
+        <div class="brand-logo">ROVEX <span>CARD</span></div>
+        <p style="color: var(--text-sub); font-size: 0.85rem;">متجرك الموثوق للبطاقات الرقمية والألعاب فوراً</p>
         
-        <div class="payment-badges" style="margin-top: 15px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <span style="background: #f0b90b; color: #000; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;">🟡 Binance Pay</span>
-            <span style="background: #ffb11a; color: #000; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;">🖤 Bybit Pay</span>
-            <span style="background: #26a17b; color: #fff; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;">💵 USDT Tether</span>
+        <div class="search-box">
+            <input type="text" placeholder="ابحث عن بطاقة، لعبة، أو خدمة...">
         </div>
-    </section>
+    </div>
 
-    <!-- قسم المنتجات -->
-    <section id="products" class="products-section" style="padding: 20px; max-width: 1200px; margin: 0 auto;">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">الأكثر طلباً ومبيعاً</h2>
-        
-        <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
-            
-            <!-- فيزا 10 -->
-            <div class="product-card">
-                <span class="card-tag">تفعيل فوري</span>
-                <img src="https://img.icons8.com/color/144/visa.png" alt="Visa Card" class="product-img">
-                <h3>بطاقة فيزا افتراضية $10</h3>
-                <p class="price-tag">10.50 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
+    <!-- أقسام التصفح الرئيسية -->
+    <div class="categories-wrapper">
+        <button class="cat-btn active" onclick="filterCategory('all')">🌐 الكل</button>
+        <button class="cat-btn" onclick="filterCategory('visa')">💳 بطاقات فيزا</button>
+        <button class="cat-btn" onclick="filterCategory('games')">🎮 الألعاب والستور</button>
+        <button class="cat-btn" onclick="filterCategory('subs')">🎬 الاشتراكات والترفيه</button>
+    </div>
+
+    <!-- شبكة المنتجات -->
+    <div class="products-grid" id="products-container">
+
+        <!-- بطاقات الفيزا -->
+        <div class="card-item" data-cat="visa">
+            <span class="card-badge">تفعيل آلي</span>
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa 10">
             </div>
-
-            <!-- فيزا 25 -->
-            <div class="product-card">
-                <span class="card-tag">الأكثر طلباً</span>
-                <img src="https://img.icons8.com/color/144/visa.png" alt="Visa Card" class="product-img">
-                <h3>بطاقة فيزا افتراضية $25</h3>
-                <p class="price-tag">25.50 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
-            <!-- ببجي 325 -->
-            <div class="product-card">
-                <span class="card-tag">تسليم آلي</span>
-                <img src="https://img.icons8.com/color/144/pubg.png" alt="PUBG UC" class="product-img">
-                <h3>شدات ببجي 325 UC</h3>
-                <p class="price-tag">5.00 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
-            <!-- ببجي 660 -->
-            <div class="product-card">
-                <span class="card-tag">عرض خاص</span>
-                <img src="https://img.icons8.com/color/144/pubg.png" alt="PUBG UC" class="product-img">
-                <h3>شدات ببجي 660 UC</h3>
-                <p class="price-tag">9.80 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
-            <!-- بلايستيشن 10 -->
-            <div class="product-card">
-                <img src="https://img.icons8.com/color/144/playstation.png" alt="PlayStation" class="product-img">
-                <h3>بلايستيشن ستور $10 (أمريكي)</h3>
-                <p class="price-tag">10.00 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
-            <!-- بلايستيشن 25 -->
-            <div class="product-card">
-                <span class="card-tag">الأعلى مبيعاً</span>
-                <img src="https://img.icons8.com/color/144/playstation.png" alt="PlayStation" class="product-img">
-                <h3>بلايستيشن ستور $25 (أمريكي)</h3>
-                <p class="price-tag">25.00 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
-            <!-- آيتونز 10 -->
-            <div class="product-card">
-                <img src="https://img.icons8.com/color/144/apple-app-store--v1.png" alt="iTunes Card" class="product-img">
-                <h3>بطاقة آبل ستور $10 (US)</h3>
-                <p class="price-tag">10.00 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
-            <!-- جوجل بلاي 10 -->
-            <div class="product-card">
-                <img src="https://img.icons8.com/color/144/google-play.png" alt="Google Play" class="product-img">
-                <h3>جوجل بلاي $10 (أمريكي)</h3>
-                <p class="price-tag">10.00 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
-            <!-- نيتفليكس -->
-            <div class="product-card">
-                <span class="card-tag">خصم</span>
-                <img src="https://img.icons8.com/color/144/netflix.png" alt="Netflix Card" class="product-img">
-                <h3>بطاقة نيتفليكس $25</h3>
-                <p class="price-tag">24.50 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
-            <!-- فري فاير -->
-            <div class="product-card">
-                <img src="https://img.icons8.com/color/144/free-fire.png" alt="Free Fire" class="product-img">
-                <h3>فري فاير 530 جوهرة</h3>
-                <p class="price-tag">5.20 USDT</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-
+            <div class="card-title">فيزا افتراضية 10$</div>
+            <div class="card-price">10.50 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
         </div>
-    </section>
+
+        <div class="card-item" data-cat="visa">
+            <span class="card-badge">الأكثر طلباً</span>
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa 25">
+            </div>
+            <div class="card-title">فيزا افتراضية 25$</div>
+            <div class="card-price">25.50 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <div class="card-item" data-cat="visa">
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa 50">
+            </div>
+            <div class="card-title">فيزا افتراضية 50$</div>
+            <div class="card-price">50.00 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <!-- ألعاب وستور -->
+        <div class="card-item" data-cat="games">
+            <span class="card-badge">تسليم ⚡</span>
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation 10">
+            </div>
+            <div class="card-title">بلايستيشن ستور $10 (US)</div>
+            <div class="card-price">10.00 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <div class="card-item" data-cat="games">
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation 25">
+            </div>
+            <div class="card-title">بلايستيشن ستور $25 (US)</div>
+            <div class="card-price">25.00 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <div class="card-item" data-cat="games">
+            <span class="card-badge">شائع</span>
+            <div class="card-img-container">
+                <img src="https://pngmania.com/wp-content/uploads/2023/02/pubg-mobile-logo.png" alt="PUBG 325">
+            </div>
+            <div class="card-title">شدات ببجي 325 UC</div>
+            <div class="card-price">5.00 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <div class="card-item" data-cat="games">
+            <div class="card-img-container">
+                <img src="https://pngmania.com/wp-content/uploads/2023/02/pubg-mobile-logo.png" alt="PUBG 660">
+            </div>
+            <div class="card-title">شدات ببجي 660 UC</div>
+            <div class="card-price">9.80 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <div class="card-item" data-cat="games">
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Free_Fire_logo.png" alt="Free Fire">
+            </div>
+            <div class="card-title">فري فاير 530 جوهرة</div>
+            <div class="card-price">5.20 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <!-- الاشتراكات -->
+        <div class="card-item" data-cat="subs">
+            <span class="card-badge">خصم</span>
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
+            </div>
+            <div class="card-title">بطاقة نيتفليكس $25</div>
+            <div class="card-price">24.50 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <div class="card-item" data-cat="subs">
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/ITunes_logo.svg" alt="iTunes">
+            </div>
+            <div class="card-title">بطاقة أبل ستور $10 (US)</div>
+            <div class="card-price">10.00 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+        <div class="card-item" data-cat="subs">
+            <div class="card-img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_2022_logo.svg" alt="Google Play">
+            </div>
+            <div class="card-title">جوجل بلاي $10 (US)</div>
+            <div class="card-price">10.00 USDT</div>
+            <a href="#" class="btn-buy-now">شراء فوراً</a>
+        </div>
+
+    </div>
 
     <!-- الفوتر -->
-    <footer style="text-align: center; padding: 20px; border-top: 1px solid #333; margin-top: 40px; color: #888;">
-        <p>© 2026 ROVEX CARD - جميع الحقوق محفوظة.</p>
-        <p style="font-size: 0.8rem; margin-top: 5px;">تسليم آلي وفوري للمنتجات الرقمية عبر نظام المحفظة الأوتوماتيكي.</p>
+    <footer>
+        <p>© 2026 ROVEX CARD - منصة البطاقات الرقمية الأولى</p>
+        <p style="margin-top: 5px;">مدعوم بنظام المحفظة والدفع الآلي عبر USDT (Binance Pay & Bybit)</p>
     </footer>
 
+    <!-- سكربت بسيط لفلترة الأقسام فوراً بدون إعادة تحميل الصفحة -->
+    <script>
+        function filterCategory(cat) {
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const items = document.querySelectorAll('.card-item');
+            items.forEach(item => {
+                if (cat === 'all' || item.getAttribute('data-cat') === cat) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
-    </html>
-    
+</html>
