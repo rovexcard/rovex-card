@@ -3,11 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROVEX CARD | متجر البطاقات الرقمية</title>
+    <title>ROVEX CARD | متجر البطاقات الرقمية والشحن الفوري</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* تحسينات إضافية لعرض الصور بطريقة شبيهة بـ LikeCard */
+        .product-card {
+            background: #1e1e2d;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify: space-between;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+        .product-img {
+            width: 100%;
+            height: 140px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px;
+        }
+        .card-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: #fff;
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 4px;
+            z-index: 2;
+        }
+        .price-tag {
+            color: #2ed573;
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin: 8px 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -17,65 +63,122 @@
             <span class="logo-icon">R</span>
             <span class="logo-text">ROVEX CARD</span>
         </div>
-        <a href="#products" class="btn-login">تصفح البطاقات</a>
+        <a href="#products" class="btn-login">تصفح المنتجات</a>
     </header>
 
-    <!-- واجهة الترحيب -->
+    <!-- واجهة الترحيب وطرق الدفع -->
     <section class="hero">
-        <h1>كل شيء رقمي، بأسلوب <span class="highlight">ROVEX</span>.</h1>
-        <p>متجرك الموثوق لشحن البطاقات الرقمية والألعاب بسرعة وسهولة.</p>
-        <p class="payment-methods">الدفع التلقائي متاح عبر: 🟡 Binance Pay | 🖤 Bybit (USDT)</p>
+        <h1>متجر <span class="highlight">ROVEX CARD</span> الرقمي</h1>
+        <p>شحن فوري وتلقائي 24/7 لكافة البطاقات والألعاب والأرقام الافتراضية</p>
+        
+        <div class="payment-badges" style="margin-top: 15px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <span style="background: #f0b90b; color: #000; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;">🟡 Binance Pay</span>
+            <span style="background: #ffb11a; color: #000; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;">🖤 Bybit Pay</span>
+            <span style="background: #26a17b; color: #fff; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;">💵 USDT Tether</span>
+        </div>
     </section>
 
-    <!-- قسم المنتجات الأساسية -->
-    <section id="products" class="products-section">
-        <h2 class="section-title">البطاقات المتاحة لشحن المحفظة والشراء</h2>
+    <!-- قسم المنتجات -->
+    <section id="products" class="products-section" style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">الأكثر طلباً ومبيعاً</h2>
         
-        <div class="products-grid">
+        <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
             
-            <!-- بطاقة فيزا 10$ -->
+            <!-- فيزا 10 -->
             <div class="product-card">
-                <div class="card-tag">عرض خاص</div>
-                <h3>بطاقة فيزا افتراضية (10$)</h3>
-                <p class="price">10.00 USDT</p>
-                <p class="desc">صالحة للشراء والتفعيل عبر الإنترنت فوراً.</p>
-                <a href="#" class="btn-buy">شراء فوراً</a>
+                <span class="card-tag">تفعيل فوري</span>
+                <img src="https://img.icons8.com/color/144/visa.png" alt="Visa Card" class="product-img">
+                <h3>بطاقة فيزا افتراضية $10</h3>
+                <p class="price-tag">10.50 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
             </div>
 
-            <!-- بطاقة فيزا 25$ -->
+            <!-- فيزا 25 -->
             <div class="product-card">
-                <div class="card-tag">أفضل قيمة</div>
-                <h3>بطاقة فيزا افتراضية (25$)</h3>
-                <p class="price">25.00 USDT</p>
-                <p class="desc">ممتازة للتسوق الإلكتروني والاشتراكات الشهرية.</p>
-                <a href="#" class="btn-buy">شراء فوراً</a>
+                <span class="card-tag">الأكثر طلباً</span>
+                <img src="https://img.icons8.com/color/144/visa.png" alt="Visa Card" class="product-img">
+                <h3>بطاقة فيزا افتراضية $25</h3>
+                <p class="price-tag">25.50 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
             </div>
 
-            <!-- بطاقة بلايستيشن 10$ -->
+            <!-- ببجي 325 -->
             <div class="product-card">
-                <div class="card-tag">الأكثر طلباً</div>
-                <h3>بطاقة بلايستيشن (10$ أمريكي)</h3>
-                <p class="price">10.00 USDT</p>
-                <p class="desc">شحن رصيد ستور بلايستيشن للمتجر الأمريكي.</p>
-                <a href="#" class="btn-buy">شراء فوراً</a>
+                <span class="card-tag">تسليم آلي</span>
+                <img src="https://img.icons8.com/color/144/pubg.png" alt="PUBG UC" class="product-img">
+                <h3>شدات ببجي 325 UC</h3>
+                <p class="price-tag">5.00 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
             </div>
 
-            <!-- ببجي 325 شدة -->
+            <!-- ببجي 660 -->
             <div class="product-card">
-                <div class="card-tag">توفير ممتاز</div>
-                <h3>شدات ببجي موبايل (325 UC)</h3>
-                <p class="price">5.00 USDT</p>
-                <p class="desc">شحن آلي وفوري للحساب.</p>
-                <a href="#" class="btn-buy">شراء فوراً</a>
+                <span class="card-tag">عرض خاص</span>
+                <img src="https://img.icons8.com/color/144/pubg.png" alt="PUBG UC" class="product-img">
+                <h3>شدات ببجي 660 UC</h3>
+                <p class="price-tag">9.80 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+
+            <!-- بلايستيشن 10 -->
+            <div class="product-card">
+                <img src="https://img.icons8.com/color/144/playstation.png" alt="PlayStation" class="product-img">
+                <h3>بلايستيشن ستور $10 (أمريكي)</h3>
+                <p class="price-tag">10.00 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+
+            <!-- بلايستيشن 25 -->
+            <div class="product-card">
+                <span class="card-tag">الأعلى مبيعاً</span>
+                <img src="https://img.icons8.com/color/144/playstation.png" alt="PlayStation" class="product-img">
+                <h3>بلايستيشن ستور $25 (أمريكي)</h3>
+                <p class="price-tag">25.00 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+
+            <!-- آيتونز 10 -->
+            <div class="product-card">
+                <img src="https://img.icons8.com/color/144/apple-app-store--v1.png" alt="iTunes Card" class="product-img">
+                <h3>بطاقة آبل ستور $10 (US)</h3>
+                <p class="price-tag">10.00 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+
+            <!-- جوجل بلاي 10 -->
+            <div class="product-card">
+                <img src="https://img.icons8.com/color/144/google-play.png" alt="Google Play" class="product-img">
+                <h3>جوجل بلاي $10 (أمريكي)</h3>
+                <p class="price-tag">10.00 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+
+            <!-- نيتفليكس -->
+            <div class="product-card">
+                <span class="card-tag">خصم</span>
+                <img src="https://img.icons8.com/color/144/netflix.png" alt="Netflix Card" class="product-img">
+                <h3>بطاقة نيتفليكس $25</h3>
+                <p class="price-tag">24.50 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+
+            <!-- فري فاير -->
+            <div class="product-card">
+                <img src="https://img.icons8.com/color/144/free-fire.png" alt="Free Fire" class="product-img">
+                <h3>فري فاير 530 جوهرة</h3>
+                <p class="price-tag">5.20 USDT</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
             </div>
 
         </div>
     </section>
 
     <!-- الفوتر -->
-    <footer>
+    <footer style="text-align: center; padding: 20px; border-top: 1px solid #333; margin-top: 40px; color: #888;">
         <p>© 2026 ROVEX CARD - جميع الحقوق محفوظة.</p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">تسليم آلي وفوري للمنتجات الرقمية عبر نظام المحفظة الأوتوماتيكي.</p>
     </footer>
 
 </body>
-</html>
+    </html>
+    
