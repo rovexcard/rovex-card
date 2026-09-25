@@ -241,7 +241,8 @@
             otp_code: generatedOTP
         };
 
-        emailjs.send('service_34dnlzv', 'template_xsmjqd8', templateParams)
+        // تم تحديث معرف الخدمة هنا إلى service_odka0lu
+        emailjs.send('service_odka0lu', 'template_xsmjqd8', templateParams)
             .then(function(response) {
                 showStatus('تم إرسال رمز التحقق بنجاح! يرجى تفقد بريدك الإلكتروني.');
                 document.getElementById('stepSendOtp').classList.add('hidden');
