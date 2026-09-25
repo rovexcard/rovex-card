@@ -1,416 +1,993 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROVEX CARD | المتجر الرقمي</title>
-  <meta name="description" content="ROVEX CARD - متجر البطاقات الرقمية والألعاب والشحن">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ROVEX CARD | متجر البطاقات الرقمية</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+ --bg:#07080b;
+ --card:#101217;
+ --card2:#151820;
+ --gold:#f4b400;
+ --gold2:#ffd65a;
+ --text:#fff;
+ --muted:#9da3ad;
+ --border:rgba(255,255,255,.08);
+ --green:#25d366;
+ --red:#ff5252;
+}
+
+body{
+ font-family:Cairo,Arial,sans-serif;
+ background:
+ radial-gradient(circle at 80% 0%,rgba(244,180,0,.12),transparent 30%),
+ radial-gradient(circle at 10% 30%,rgba(91,64,255,.10),transparent 28%),
+ var(--bg);
+ color:var(--text);
+ min-height:100vh;
+}
+
+button,input{font-family:inherit}
+button{cursor:pointer;border:0}
+
+.topbar{
+ background:linear-gradient(90deg,#f4b400,#ffd65a,#f4b400);
+ color:#111;
+ text-align:center;
+ padding:8px 12px;
+ font-size:13px;
+ font-weight:800;
+}
+
+header{
+ position:sticky;
+ top:0;
+ z-index:50;
+ background:rgba(7,8,11,.88);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--border);
+}
+
+.nav{
+ max-width:1250px;
+ margin:auto;
+ min-height:76px;
+ padding:0 20px;
+ display:flex;
+ align-items:center;
+ gap:22px;
+}
+
+.logo{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ font-size:23px;
+ font-weight:900;
+ white-space:nowrap;
+}
+
+.logoBox{
+ width:43px;height:43px;
+ border-radius:13px;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(135deg,#ffd65a,#d98c00);
+ color:#111;
+ box-shadow:0 8px 30px rgba(244,180,0,.2);
+}
+
+.logoBox span{font-size:21px}
+
+nav{
+ display:flex;
+ gap:7px;
+ margin-right:auto;
+}
+
+nav button{
+ color:#bfc4cc;
+ background:transparent;
+ padding:10px 14px;
+ border-radius:10px;
+ font-weight:700;
+}
+
+nav button:hover,nav button.active{
+ color:#111;
+ background:var(--gold);
+}
+
+.search{
+ width:220px;
+ position:relative;
+}
+
+.search input{
+ width:100%;
+ background:#11141a;
+ color:white;
+ border:1px solid var(--border);
+ outline:0;
+ padding:11px 40px 11px 12px;
+ border-radius:12px;
+}
+
+.search span{
+ position:absolute;
+ right:13px;
+ top:9px;
+ color:var(--gold);
+}
+
+.navActions{
+ display:flex;
+ gap:8px;
+}
+
+.action{
+ min-width:43px;
+ height:43px;
+ border-radius:12px;
+ color:white;
+ background:#13161d;
+ border:1px solid var(--border);
+ font-weight:800;
+}
+
+.action:hover{border-color:var(--gold);color:var(--gold)}
+
+.menuBtn{display:none}
+
+.hero{
+ max-width:1250px;
+ margin:25px auto 0;
+ padding:0 20px;
+}
+
+.heroBox{
+ min-height:350px;
+ border-radius:28px;
+ overflow:hidden;
+ position:relative;
+ padding:55px;
+ background:
+ radial-gradient(circle at 75% 35%,rgba(255,215,90,.3),transparent 25%),
+ radial-gradient(circle at 95% 80%,rgba(114,71,255,.25),transparent 25%),
+ linear-gradient(125deg,#101218,#181b23 50%,#0c0d11);
+ border:1px solid rgba(244,180,0,.2);
+}
+
+.heroBox:after{
+ content:"";
+ position:absolute;
+ width:330px;height:330px;
+ border-radius:50%;
+ left:-90px;bottom:-190px;
+ background:rgba(244,180,0,.08);
+}
+
+.heroText{position:relative;z-index:2;max-width:650px}
+
+.badge{
+ display:inline-flex;
+ background:rgba(244,180,0,.12);
+ border:1px solid rgba(244,180,0,.3);
+ color:var(--gold2);
+ padding:7px 13px;
+ border-radius:30px;
+ font-size:13px;
+ font-weight:800;
+ margin-bottom:18px;
+}
+
+.hero h1{
+ font-size:48px;
+ line-height:1.25;
+ margin-bottom:14px;
+}
+
+.hero h1 span{
+ color:var(--gold);
+}
+
+.hero p{
+ color:#b9bec7;
+ line-height:1.9;
+ font-size:16px;
+ margin-bottom:25px;
+}
+
+.primary{
+ background:linear-gradient(135deg,#ffd65a,#e69b00);
+ color:#111;
+ padding:13px 22px;
+ border-radius:12px;
+ font-weight:900;
+ box-shadow:0 10px 30px rgba(244,180,0,.18);
+}
+
+.secondary{
+ background:#181b22;
+ border:1px solid var(--border);
+ color:white;
+ padding:13px 22px;
+ border-radius:12px;
+ font-weight:800;
+ margin-right:8px;
+}
+
+.primary:hover,.secondary:hover{transform:translateY(-2px)}
+
+.heroVisual{
+ position:absolute;
+ left:70px;
+ top:45px;
+ width:300px;
+ height:245px;
+ transform:rotate(-5deg);
+ opacity:.95;
+}
+
+.fakeCard{
+ position:absolute;
+ width:250px;
+ height:155px;
+ border-radius:20px;
+ padding:20px;
+ background:linear-gradient(135deg,#f4b400,#6d4300);
+ box-shadow:0 25px 60px rgba(0,0,0,.4);
+}
+
+.fakeCard.two{
+ right:0;
+ top:75px;
+ transform:rotate(13deg);
+ background:linear-gradient(135deg,#242832,#08090b);
+ border:1px solid rgba(255,255,255,.15);
+}
+
+.fakeCard b{
+ font-size:18px;
+}
+
+.fakeCard small{
+ display:block;
+ margin-top:55px;
+ opacity:.75;
+}
+
+.stats{
+ max-width:1250px;
+ margin:20px auto;
+ padding:0 20px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:13px;
+}
+
+.stat{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:17px;
+ padding:18px;
+ display:flex;
+ align-items:center;
+ gap:14px;
+}
+
+.statIcon{
+ width:45px;height:45px;
+ border-radius:13px;
+ display:grid;
+ place-items:center;
+ background:rgba(244,180,0,.12);
+ color:var(--gold);
+ font-size:21px;
+}
+
+.stat b{font-size:20px}
+.stat small{display:block;color:var(--muted)}
+
+.container{
+ max-width:1250px;
+ margin:35px auto;
+ padding:0 20px;
+}
+
+.sectionHead{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ gap:15px;
+ margin-bottom:18px;
+}
+
+.sectionHead h2{font-size:27px}
+.sectionHead p{color:var(--muted);font-size:13px}
+
+.categories{
+ display:flex;
+ gap:8px;
+ overflow:auto;
+ padding-bottom:5px;
+ margin-bottom:22px;
+}
+
+.cat{
+ white-space:nowrap;
+ padding:10px 18px;
+ border-radius:30px;
+ background:#12151b;
+ color:#b7bdc6;
+ border:1px solid var(--border);
+ font-weight:800;
+}
+
+.cat.active,.cat:hover{
+ background:var(--gold);
+ color:#111;
+}
+
+.products{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:16px;
+}
+
+.product{
+ background:linear-gradient(180deg,#12151b,#0e1015);
+ border:1px solid var(--border);
+ border-radius:20px;
+ overflow:hidden;
+ transition:.25s;
+ position:relative;
+}
+
+.product:hover{
+ transform:translateY(-5px);
+ border-color:rgba(244,180,0,.45);
+ box-shadow:0 18px 50px rgba(0,0,0,.25);
+}
+
+.productVisual{
+ height:175px;
+ position:relative;
+ overflow:hidden;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+.productVisual:before{
+ content:"";
+ position:absolute;
+ width:170px;height:170px;
+ border-radius:50%;
+ background:rgba(255,255,255,.12);
+ filter:blur(2px);
+}
+
+.productVisual.game{background:linear-gradient(135deg,#3817a4,#09122e)}
+.productVisual.ps{background:linear-gradient(135deg,#075bd5,#07152d)}
+.productVisual.steam{background:linear-gradient(135deg,#142f47,#071018)}
+.productVisual.visa{background:linear-gradient(135deg,#1e1e28,#4c2d94)}
+.productVisual.master{background:linear-gradient(135deg,#d45115,#3b1110)}
+.productVisual.netflix{background:linear-gradient(135deg,#b90019,#250008)}
+.productVisual.apple{background:linear-gradient(135deg,#555,#111)}
+.productVisual.google{background:linear-gradient(135deg,#1676e8,#092650)}
+.productVisual.xbox{background:linear-gradient(135deg,#107c10,#041804)}
+.productVisual.roblox{background:linear-gradient(135deg,#222,#090909)}
+
+.visualLogo{
+ position:relative;
+ z-index:2;
+ width:100px;height:100px;
+ border-radius:25px;
+ background:rgba(255,255,255,.1);
+ border:1px solid rgba(255,255,255,.2);
+ display:grid;
+ place-items:center;
+ font-size:43px;
+ font-weight:900;
+ backdrop-filter:blur(8px);
+ box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+.visualText{
+ position:absolute;
+ z-index:3;
+ bottom:13px;
+ right:14px;
+ left:14px;
+ font-size:18px;
+ font-weight:900;
+}
+
+.demo{
+ position:absolute;
+ top:12px;
+ left:12px;
+ z-index:4;
+ background:rgba(0,0,0,.55);
+ color:#ffd65a;
+ border:1px solid rgba(255,214,90,.25);
+ padding:4px 8px;
+ border-radius:7px;
+ font-size:10px;
+ font-weight:900;
+}
+
+.productBody{padding:15px}
+
+.productBody h3{
+ font-size:16px;
+ margin-bottom:5px;
+}
+
+.productBody p{
+ color:var(--muted);
+ font-size:12px;
+ min-height:38px;
+}
+
+.priceRow{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ margin-top:13px;
+}
+
+.price{
+ color:var(--gold2);
+ font-size:19px;
+ font-weight:900;
+}
+
+.buy{
+ padding:9px 14px;
+ border-radius:10px;
+ background:var(--gold);
+ color:#111;
+ font-weight:900;
+}
+
+.buy:hover{background:#ffd65a}
+
+.features{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:15px;
+ margin-top:40px;
+}
+
+.feature{
+ padding:25px;
+ border-radius:18px;
+ background:linear-gradient(135deg,#12151b,#0d0f13);
+ border:1px solid var(--border);
+}
+
+.featureIcon{
+ font-size:28px;
+ color:var(--gold);
+ margin-bottom:12px;
+}
+
+.feature h3{margin-bottom:7px}
+.feature p{color:var(--muted);line-height:1.8;font-size:13px}
+
+footer{
+ margin-top:60px;
+ border-top:1px solid var(--border);
+ padding:35px 20px;
+ text-align:center;
+ color:var(--muted);
+}
+
+footer b{color:var(--gold)}
+
+.overlay{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.72);
+ backdrop-filter:blur(7px);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ z-index:100;
+ padding:15px;
+}
+
+.overlay.show{display:flex}
+
+.modal{
+ width:min(480px,100%);
+ background:#11141a;
+ border:1px solid rgba(255,255,255,.1);
+ border-radius:22px;
+ box-shadow:0 30px 100px rgba(0,0,0,.55);
+ overflow:hidden;
+}
+
+.modalHead{
+ padding:18px 20px;
+ border-bottom:1px solid var(--border);
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+}
+
+.modalHead h3{font-size:19px}
+
+.close{
+ width:36px;height:36px;
+ border-radius:10px;
+ background:#1b1f27;
+ color:white;
+ font-size:20px;
+}
+
+.modalBody{padding:22px}
+
+.input{
+ width:100%;
+ background:#090b0f;
+ border:1px solid var(--border);
+ color:white;
+ outline:none;
+ padding:13px;
+ border-radius:11px;
+ margin-bottom:12px;
+}
+
+.input:focus{border-color:var(--gold)}
+
+.full{width:100%}
+
+.paymentGrid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ margin:15px 0;
+}
+
+.pay{
+ background:#181b22;
+ border:1px solid var(--border);
+ color:white;
+ padding:17px 10px;
+ border-radius:13px;
+ font-weight:800;
+}
+
+.pay:hover{border-color:var(--gold)}
+
+.cartItem{
+ display:flex;
+ justify-content:space-between;
+ padding:13px 0;
+ border-bottom:1px solid var(--border);
+}
+
+.empty{
+ text-align:center;
+ color:var(--muted);
+ padding:30px 10px;
+}
+
+.toast{
+ position:fixed;
+ left:20px;
+ bottom:20px;
+ z-index:300;
+ background:#151820;
+ border:1px solid rgba(244,180,0,.3);
+ color:white;
+ padding:13px 17px;
+ border-radius:12px;
+ box-shadow:0 15px 40px rgba(0,0,0,.4);
+ transform:translateY(100px);
+ opacity:0;
+ transition:.3s;
+}
+
+.toast.show{
+ transform:translateY(0);
+ opacity:1;
+}
+
+@media(max-width:1050px){
+ .products{grid-template-columns:repeat(3,1fr)}
+ .heroVisual{opacity:.35;left:20px}
+ .search{width:170px}
+}
+
+@media(max-width:800px){
+ nav{
+  display:none;
+  position:absolute;
+  top:76px;
+  right:10px;
+  left:10px;
+  background:#101217;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:10px;
+  flex-direction:column;
+ }
+
+ nav.open{display:flex}
+
+ .menuBtn{display:block}
+ .search{display:none}
+ .stats{grid-template-columns:1fr 1fr}
+ .products{grid-template-columns:repeat(2,1fr)}
+ .heroBox{padding:35px 25px;min-height:390px}
+ .hero h1{font-size:35px}
+ .heroVisual{display:none}
+ .features{grid-template-columns:1fr}
+}
+
+@media(max-width:520px){
+ .nav{padding:0 12px}
+ .logo{font-size:18px}
+ .logoBox{width:38px;height:38px}
+ .action{min-width:39px;height:39px}
+ .stats{grid-template-columns:1fr 1fr}
+ .stat{padding:12px}
+ .stat b{font-size:16px}
+ .products{gap:10px}
+ .productVisual{height:145px}
+ .visualLogo{width:78px;height:78px;font-size:32px}
+ .productBody{padding:11px}
+ .productBody h3{font-size:14px}
+ .price{font-size:16px}
+ .buy{padding:8px 10px;font-size:12px}
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= TOP BAR ================= -->
-<div class="top-bar">
-  <div>⚡ تسليم رقمي سريع 24/7</div>
-  <div>🔒 تجربة دفع آمنة</div>
+<div class="topbar">
+ 🔥 ROVEX CARD — متجر تجريبي للبطاقات الرقمية والشحن • جميع المنتجات الحالية للتجربة
 </div>
 
-<!-- ================= HEADER ================= -->
-<header class="header">
+<header>
+<div class="nav">
 
-  <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+<button class="action menuBtn" onclick="toggleMenu()">☰</button>
 
-  <a href="#" class="logo">
-    <strong>ROVEX</strong>
-    <span>CARD</span>
-  </a>
+<div class="logo">
+ <div class="logoBox"><span>R</span></div>
+ ROVEX CARD
+</div>
 
-  <nav id="mainNav">
-    <a href="#home">الرئيسية</a>
-    <a href="#categories">الأقسام</a>
-    <a href="#products">المنتجات</a>
-    <a href="#orders">طلباتي</a>
-  </nav>
+<nav id="nav">
+ <button class="active" onclick="filterProducts('all',this)">الرئيسية</button>
+ <button onclick="filterProducts('games',this)">الألعاب</button>
+ <button onclick="filterProducts('cards',this)">البطاقات</button>
+ <button onclick="filterProducts('subscriptions',this)">الاشتراكات</button>
+ <button onclick="showOrders()">طلباتي</button>
+</nav>
 
-  <div class="header-actions">
+<div class="search">
+ <span>⌕</span>
+ <input id="searchInput" oninput="searchProducts()" placeholder="ابحث عن منتج...">
+</div>
 
-    <button class="header-icon" onclick="openSearch()">
-      🔎
-    </button>
+<div class="navActions">
+ <button class="action" onclick="showWallet()">💰</button>
+ <button class="action" onclick="showCart()">🛒 <small id="cartCount">0</small></button>
+ <button class="action" onclick="showLogin()">👤</button>
+</div>
 
-    <button class="wallet-button" onclick="openWallet()">
-      💳
-      <span>المحفظة</span>
-      <strong id="walletBalance">0.00 $</strong>
-    </button>
-
-    <!-- اترك زر تسجيل الدخول الموجود عندك إذا كان مربوطًا بالـOTP -->
-    <button class="account-button" onclick="openLogin()">
-      👤 تسجيل الدخول
-    </button>
-
-  </div>
+</div>
 </header>
 
+<main>
 
-<!-- ================= HERO ================= -->
-<section id="home" class="hero">
+<section class="hero">
+<div class="heroBox">
 
-  <div class="hero-content">
+<div class="heroText">
+ <div class="badge">⚡ DIGITAL STORE</div>
 
-    <div class="hero-label">
-      ROVEX CARD • DIGITAL STORE
-    </div>
+ <h1>
+ كل شحناتك الرقمية<br>
+ <span>في مكان واحد</span>
+ </h1>
 
-    <h1>
-      عالمك الرقمي
-      <span>في مكان واحد.</span>
-    </h1>
+ <p>
+ ROVEX CARD منصة تجريبية لبيع البطاقات الرقمية،
+ شحن الألعاب والاشتراكات بتصميم متجر حقيقي وسهل الاستخدام.
+ </p>
 
-    <p>
-      بطاقات رقمية، ألعاب، شحن، اشتراكات وخدمات رقمية
-      بتجربة متجر حديثة وسريعة.
-    </p>
+ <button class="primary" onclick="scrollToProducts()">تصفح المنتجات 🛒</button>
+ <button class="secondary" onclick="showLogin()">حسابي 👤</button>
+</div>
 
-    <div class="hero-buttons">
-      <a href="#products" class="primary-button">
-        تصفح المنتجات
-      </a>
+<div class="heroVisual">
+ <div class="fakeCard">
+  <b>ROVEX CARD</b>
+  <small>PREPAID DIGITAL</small>
+ </div>
+ <div class="fakeCard two">
+  <b>ROVEX</b>
+  <small>DIGITAL STORE</small>
+ </div>
+</div>
 
-      <button class="secondary-button" onclick="openLogin()">
-        إنشاء حساب
-      </button>
-    </div>
-
-    <div class="hero-features">
-      <span>⚡ تسليم سريع</span>
-      <span>🔐 حساب آمن</span>
-      <span>🌍 منتجات عالمية</span>
-    </div>
-
-  </div>
-
-
-  <div class="hero-visual">
-
-    <div class="digital-card">
-
-      <div class="card-glow"></div>
-
-      <div class="card-top">
-        <span>ROVEX CARD</span>
-        <span>2026</span>
-      </div>
-
-      <div class="card-chip"></div>
-
-      <div class="card-title">
-        DIGITAL
-      </div>
-
-      <div class="card-number">
-        •••• •••• •••• 2026
-      </div>
-
-      <div class="card-bottom">
-        <span>ROVEX</span>
-        <span>24/7</span>
-      </div>
-
-    </div>
-
-  </div>
-
+</div>
 </section>
 
-
-<!-- ================= STATS ================= -->
 <section class="stats">
 
-  <div>
-    <strong>+1000</strong>
-    <span>منتجات قابلة للإضافة</span>
-  </div>
+<div class="stat">
+ <div class="statIcon">⚡</div>
+ <div><b>فوري</b><small>تسليم رقمي</small></div>
+</div>
 
-  <div>
-    <strong>24/7</strong>
-    <span>المتجر متاح دائمًا</span>
-  </div>
+<div class="stat">
+ <div class="statIcon">🛡️</div>
+ <div><b>آمن</b><small>نظام حماية</small></div>
+</div>
 
-  <div>
-    <strong>⚡</strong>
-    <span>تسليم رقمي</span>
-  </div>
+<div class="stat">
+ <div class="statIcon">🎮</div>
+ <div><b>100+</b><small>تصنيف مستقبلي</small></div>
+</div>
 
-  <div>
-    <strong>🔒</strong>
-    <span>حماية الحساب</span>
-  </div>
-
-</section>
-
-
-<!-- ================= CATEGORIES ================= -->
-<section id="categories" class="section">
-
-  <div class="section-heading">
-    <div>
-      <small>EXPLORE</small>
-      <h2>تصفح الأقسام</h2>
-      <p>اختار القسم الذي تبحث عنه</p>
-    </div>
-  </div>
-
-
-  <div class="category-grid">
-
-    <button onclick="filterProducts('all')">
-      <span class="category-icon">✨</span>
-      <strong>كل المنتجات</strong>
-      <small>عرض الكتالوج</small>
-    </button>
-
-    <button onclick="filterProducts('games')">
-      <span class="category-icon">🎮</span>
-      <strong>الألعاب</strong>
-      <small>PlayStation • Xbox • Steam</small>
-    </button>
-
-    <button onclick="filterProducts('cards')">
-      <span class="category-icon">💳</span>
-      <strong>البطاقات الرقمية</strong>
-      <small>Gift Cards • Visa</small>
-    </button>
-
-    <button onclick="filterProducts('mobile')">
-      <span class="category-icon">📱</span>
-      <strong>شحن الألعاب</strong>
-      <small>PUBG • Free Fire • eFootball</small>
-    </button>
-
-    <button onclick="filterProducts('subscriptions')">
-      <span class="category-icon">🎬</span>
-      <strong>الاشتراكات</strong>
-      <small>Entertainment & Services</small>
-    </button>
-
-  </div>
+<div class="stat">
+ <div class="statIcon">💳</div>
+ <div><b>24/7</b><small>متجر متاح</small></div>
+</div>
 
 </section>
 
+<section class="container" id="productsSection">
 
-<!-- ================= PRODUCTS ================= -->
-<section id="products" class="section">
+<div class="sectionHead">
+ <div>
+  <h2>🔥 المنتجات</h2>
+  <p>منتجات تجريبية لعرض شكل المتجر قبل ربط المورد الحقيقي</p>
+ </div>
+</div>
 
-  <div class="products-heading">
+<div class="categories">
+ <button class="cat active" onclick="filterProducts('all',this)">الكل</button>
+ <button class="cat" onclick="filterProducts('games',this)">🎮 ألعاب</button>
+ <button class="cat" onclick="filterProducts('cards',this)">💳 بطاقات</button>
+ <button class="cat" onclick="filterProducts('subscriptions',this)">📺 اشتراكات</button>
+</div>
 
-    <div>
-      <small>ROVEX STORE</small>
-      <h2>المنتجات</h2>
-      <p>
-        المنتجات الموجودة حاليًا واجهة تجريبية،
-        وسيتم ربط الكتالوج الحقيقي بالـAPI لاحقًا.
-      </p>
-    </div>
+<div class="products" id="products"></div>
 
-    <div class="filters">
+<div class="features">
 
-      <button class="active" onclick="filterProducts('all')">
-        الكل
-      </button>
+<div class="feature">
+ <div class="featureIcon">⚡</div>
+ <h3>تسليم سريع</h3>
+ <p>تصميم النظام مجهز ليتم ربطه لاحقًا بتسليم المنتجات تلقائيًا عن طريق API.</p>
+</div>
 
-      <button onclick="filterProducts('games')">
-        ألعاب
-      </button>
+<div class="feature">
+ <div class="featureIcon">🔐</div>
+ <h3>حساب المستخدم</h3>
+ <p>واجهة حساب ومحفظة وطلبات جاهزة للتطوير وربطها بقاعدة بيانات حقيقية.</p>
+</div>
 
-      <button onclick="filterProducts('cards')">
-        بطاقات
-      </button>
+<div class="feature">
+ <div class="featureIcon">🌍</div>
+ <h3>متجر رقمي</h3>
+ <p>التصميم قابل لإضافة مئات المنتجات والتصنيفات بدون تغيير شكل المتجر.</p>
+</div>
 
-      <button onclick="filterProducts('mobile')">
-        شحن
-      </button>
+</div>
 
-      <button onclick="filterProducts('subscriptions')">
-        اشتراكات
-      </button>
+</section>
 
-    </div>
+</main>
+
+<footer>
+ <b>ROVEX CARD</b> © 2026 — متجر رقمي تجريبي
+ <br>
+ <small>المنتجات والأسعار الحالية وهمية لأغراض اختبار التصميم فقط.</small>
+</footer>
+
+<!-- LOGIN -->
+
+<div class="overlay" id="loginModal">
+<div class="modal">
+
+<div class="modalHead">
+ <h3>👤 تسجيل الدخول</h3>
+ <button class="close" onclick="closeModal('loginModal')">×</button>
+</div>
+
+<div class="modalBody">
+ <p style="color:#aaa;font-size:13px;margin-bottom:15px">
+ تسجيل دخول تجريبي — يمكن استبداله بنظام OTP الحقيقي لاحقًا.
+ </p>
+
+ <input class="input" id="phone" placeholder="رقم الهاتف">
+ <button class="primary full" onclick="demoLogin()">متابعة</button>
+</div>
+
+</div>
+</div>
+
+<!-- WALLET -->
+
+<div class="overlay" id="walletModal">
+<div class="modal">
+
+<div class="modalHead">
+ <h3>💰 محفظتي</h3>
+ <button class="close" onclick="closeModal('walletModal')">×</button>
+</div>
+
+<div class="modalBody" style="text-align:center">
+
+<div style="font-size:13px;color:#999">الرصيد التجريبي</div>
+<div style="font-size:38px;font-weight:900;color:#ffd65a;margin:8px">
+ $<span id="balance">0.00</span>
+</div>
+
+<button class="primary full" onclick="showPayment()">
+ + إضافة رصيد
+</button>
+
+</div>
+</div>
+</div>
+
+<!-- PAYMENT -->
+
+<div class="overlay" id="paymentModal">
+<div class="modal">
+
+<div class="modalHead">
+ <h3>💳 إضافة رصيد</h3>
+ <button class="close" onclick="closeModal('paymentModal')">×</button>
+</div>
+
+<div class="modalBody">
+
+<input class="input" id="amount" type="number" placeholder="المبلغ بالدولار">
+
+<div class="paymentGrid">
+ <button class="pay" onclick="fakePayment('Binance')">🟡 Binance</button>
+ <button class="pay" onclick="fakePayment('Bybit')">🔵 Bybit</button>
+ <button class="pay" onclick="fakePayment('USDT')">₮ USDT</button>
+ <button class="pay" onclick="fakePayment('رصيد')">📱 رصيد</button>
+</div>
+
+<p style="font-size:11px;color:#777;text-align:center">
+ هذه خيارات تجريبية ولن يتم خصم أي أموال.
+</p>
+
+</div>
+</div>
+</div>
+
+<!-- CART -->
+
+<div class="overlay" id="cartModal">
+<div class="modal">
+
+<div class="modalHead">
+ <h3>🛒 السلة</h3>
+ <button class="close" onclick="closeModal('cartModal')">×</button>
+</div>
+
+<div class="modalBody">
+ <div id="cartItems"></div>
+
+ <div style="display:flex;justify-content:space-between;margin:18px 0;font-weight:900">
+  <span>المجموع</span>
+  <span style="color:#ffd65a">$<span id="cartTotal">0.00</span></span>
+ </div>
+
+ <button class="primary full" onclick="checkout()">إتمام الطلب</button>
+</div>
+
+</div>
+</div>
+
+<!-- ORDERS -->
+
+<div class="overlay" id="ordersModal">
+<div class="modal">
+
+<div class="modalHead">
+ <h3>📦 طلباتي</h3>
+ <button class="close" onclick="closeModal('ordersModal')">×</button>
+</div>
+
+<div class="modalBody" id="ordersList">
+ <div class="empty">لا توجد طلبات حتى الآن.</div>
+</div>
+
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const products = [
+
+ {id:1,name:"PlayStation Store",desc:"بطاقة PlayStation رقمية تجريبية",price:10,cat:"games",type:"ps",logo:"PS"},
+ {id:2,name:"Steam Wallet",desc:"رصيد Steam رقمي تجريبي",price:10,cat:"games",type:"steam",logo:"S"},
+ {id:3,name:"PUBG Mobile",desc:"شحن UC تجريبي للعبة PUBG",price:5,cat:"games",type:"game",logo:"UC"},
+ {id:4,name:"Free Fire",desc:"شحن Diamonds تجريبي",price:5,cat:"games",type:"game",logo:"FF"},
+ {id:5,name:"Xbox Gift Card",desc:"بطاقة Xbox رقمية تجريبية",price:15,cat:"games",type:"xbox",logo:"X"},
+ {id:6,name:"Roblox Gift Card",desc:"بطاقة Roblox رقمية تجريبية",price:10,cat:"games",type:"roblox",logo:"R"},
+ {id:7,name:"Visa Digital",desc:"بطاقة Visa رقمية تجريبية",price:20,cat:"cards",type:"visa",logo:"VISA"},
+ {id:8,name:"Mastercard Digital",desc:"بطاقة Mastercard تجريبية",price:20,cat:"cards",type:"master",logo:"MC"},
+ {id:9,name:"Apple Gift Card",desc:"بطاقة Apple رقمية تجريبية",price:10,cat:"cards",type:"apple",logo:""},
+ {id:10,name:"Google Play",desc:"رصيد Google Play تجريبي",price:10,cat:"cards",type:"google",logo:"▶"},
+ {id:11,name:"Netflix",desc:"اشتراك Netflix تجريبي",price:8,cat:"subscriptions",type:"netflix",logo:"N"},
+ {id:12,name:"Netflix Premium",desc:"خطة Premium تجريبية",price:15,cat:"subscriptions",type:"netflix",logo:"N"}
+];
+
+let cart=[];
+let orders=[];
+let currentFilter="all";
+
+function renderProducts(){
+
+ const box=document.getElementById("products");
+ const search=document.getElementById("searchInput").value.toLowerCase();
+
+ let list=products.filter(p=>{
+  const category=currentFilter==="all" || p.cat===currentFilter;
+  const text=p.name.toLowerCase().includes(search) ||
+             p.desc.toLowerCase().includes(search);
+  return category && text;
+ });
+
+ if(!list.length){
+  box.innerHTML='<div class="empty" style="grid-column:1/-1">لا توجد منتجات مطابقة 🔎</div>';
+  return;
+ }
+
+ box.innerHTML=list.map(p=>`
+
+ <article class="product">
+
+  <div class="productVisual ${p.type}">
+
+   <div class="demo">تجريبي</div>
+
+   <div class="visualLogo">${p.logo}</div>
+
+   <div class="visualText">${p.name}</div>
 
   </div>
 
+  <div class="productBody">
 
-  <div class="products-grid" id="productsGrid">
+   <h3>${p.name}</h3>
 
+   <p>${p.desc}</p>
 
-    <!-- PRODUCT -->
-    <article class="product-card" data-category="games">
+   <div class="priceRow">
 
-      <span class="product-badge">
-        الأكثر طلبًا
-      </span>
+    <div class="price">$${p.price.toFixed(2)}</div>
 
-      <div class="product-image playstation">
-        PS
-      </div>
+    <button class="buy" onclick="addToCart(${p.id})">
+     شراء
+    </button>
 
-      <small>PLAYSTATION</small>
+   </div>
 
-      <h3>
-        PlayStation Gift Card $10
-      </h3>
-
-      <div class="product-price">
-        10.50 <span>USDT</span>
-      </div>
-
-      <button onclick="buyProduct('PlayStation Gift Card $10')">
-        شراء الآن
-      </button>
-
-    </article>
-
-
-    <!-- PRODUCT -->
-    <article class="product-card" data-category="games">
-
-      <div class="product-image steam">
-        STEAM
-      </div>
-
-      <small>STEAM</small>
-
-      <h3>
-        Steam Wallet $20
-      </h3>
-
-      <div class="product-price">
-        20.80 <span>USDT</span>
-      </div>
-
-      <button onclick="buyProduct('Steam Wallet $20')">
-        شراء الآن
-      </button>
-
-    </article>
-
-
-    <!-- PRODUCT -->
-    <article class="product-card" data-category="cards">
-
-      <span class="product-badge">
-        DIGITAL
-      </span>
-
-      <div class="product-image visa">
-        VISA
-      </div>
-
-      <small>DIGITAL CARD</small>
-
-      <h3>
-        Visa Digital $25
-      </h3>
-
-      <div class="product-price">
-        25.90 <span>USDT</span>
-      </div>
-
-      <button onclick="buyProduct('Visa Digital $25')">
-        شراء الآن
-      </button>
-
-    </article>
-
-
-    <!-- PRODUCT -->
-    <article class="product-card" data-category="mobile">
-
-      <div class="product-image pubg">
-        PUBG
-      </div>
-
-      <small>PUBG MOBILE</small>
-
-      <h3>
-        PUBG Mobile UC
-      </h3>
-
-      <div class="product-price">
-        5.20 <span>USDT</span>
-      </div>
-
-      <button onclick="buyProduct('PUBG Mobile UC')">
-        شراء الآن
-      </button>
-
-    </article>
-
-
-    <!-- PRODUCT -->
-    <article class="product-card" data-category="mobile">
-
-      <div class="product-image freefire">
-        FREE FIRE
-      </div>
-
-      <small>FREE FIRE</small>
-
-      <h3>
-        Free Fire Diamonds
-      </h3>
-
-      <div class="product-price">
-        5.40 <span>USDT</span>
-      </div>
-
-      <button onclick="buyProduct('Free Fire Diamonds')">
-        شراء الآن
-      </button>
-
-    </article>
-
-
-    <!-- PRODUCT -->
-    <article class="product-card" data-category="subscriptions">
-
-      <div class="product-image netflix">
-        N
-      </div>
-
-      <small>NETFLIX</small>
-
-      <h3>
-        Netflix Gift Card $25
-      </h3>
-
-      <div class="product-price">
-        24.90 <span>USDT</span>
-      </div>
-
-      <button onclick="buyProduct('Netflix Gift Card $25')">
-        شراء الآن
-      </button>
-
-    </article>
-
-
-    <!-- PRODUCT -->
-    <article class="product-card" data-category="games">
-
-      <div class="product-image xbox">
-        XBOX
-      </div>
-
-      <small>XBOX</small>
-
-      <h3>
-        Xbox Gift Card $25
-      </h3>
-
-      <div class="product
+  </di
