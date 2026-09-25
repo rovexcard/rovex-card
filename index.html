@@ -1,993 +1,542 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>ROVEX CARD | متجر البطاقات الرقمية</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
- --bg:#07080b;
- --card:#101217;
- --card2:#151820;
- --gold:#f4b400;
- --gold2:#ffd65a;
- --text:#fff;
- --muted:#9da3ad;
- --border:rgba(255,255,255,.08);
- --green:#25d366;
- --red:#ff5252;
-}
-
-body{
- font-family:Cairo,Arial,sans-serif;
- background:
- radial-gradient(circle at 80% 0%,rgba(244,180,0,.12),transparent 30%),
- radial-gradient(circle at 10% 30%,rgba(91,64,255,.10),transparent 28%),
- var(--bg);
- color:var(--text);
- min-height:100vh;
-}
-
-button,input{font-family:inherit}
-button{cursor:pointer;border:0}
-
-.topbar{
- background:linear-gradient(90deg,#f4b400,#ffd65a,#f4b400);
- color:#111;
- text-align:center;
- padding:8px 12px;
- font-size:13px;
- font-weight:800;
-}
-
-header{
- position:sticky;
- top:0;
- z-index:50;
- background:rgba(7,8,11,.88);
- backdrop-filter:blur(18px);
- border-bottom:1px solid var(--border);
-}
-
-.nav{
- max-width:1250px;
- margin:auto;
- min-height:76px;
- padding:0 20px;
- display:flex;
- align-items:center;
- gap:22px;
-}
-
-.logo{
- display:flex;
- align-items:center;
- gap:10px;
- font-size:23px;
- font-weight:900;
- white-space:nowrap;
-}
-
-.logoBox{
- width:43px;height:43px;
- border-radius:13px;
- display:grid;
- place-items:center;
- background:linear-gradient(135deg,#ffd65a,#d98c00);
- color:#111;
- box-shadow:0 8px 30px rgba(244,180,0,.2);
-}
-
-.logoBox span{font-size:21px}
-
-nav{
- display:flex;
- gap:7px;
- margin-right:auto;
-}
-
-nav button{
- color:#bfc4cc;
- background:transparent;
- padding:10px 14px;
- border-radius:10px;
- font-weight:700;
-}
-
-nav button:hover,nav button.active{
- color:#111;
- background:var(--gold);
-}
-
-.search{
- width:220px;
- position:relative;
-}
-
-.search input{
- width:100%;
- background:#11141a;
- color:white;
- border:1px solid var(--border);
- outline:0;
- padding:11px 40px 11px 12px;
- border-radius:12px;
-}
-
-.search span{
- position:absolute;
- right:13px;
- top:9px;
- color:var(--gold);
-}
-
-.navActions{
- display:flex;
- gap:8px;
-}
-
-.action{
- min-width:43px;
- height:43px;
- border-radius:12px;
- color:white;
- background:#13161d;
- border:1px solid var(--border);
- font-weight:800;
-}
-
-.action:hover{border-color:var(--gold);color:var(--gold)}
-
-.menuBtn{display:none}
-
-.hero{
- max-width:1250px;
- margin:25px auto 0;
- padding:0 20px;
-}
-
-.heroBox{
- min-height:350px;
- border-radius:28px;
- overflow:hidden;
- position:relative;
- padding:55px;
- background:
- radial-gradient(circle at 75% 35%,rgba(255,215,90,.3),transparent 25%),
- radial-gradient(circle at 95% 80%,rgba(114,71,255,.25),transparent 25%),
- linear-gradient(125deg,#101218,#181b23 50%,#0c0d11);
- border:1px solid rgba(244,180,0,.2);
-}
-
-.heroBox:after{
- content:"";
- position:absolute;
- width:330px;height:330px;
- border-radius:50%;
- left:-90px;bottom:-190px;
- background:rgba(244,180,0,.08);
-}
-
-.heroText{position:relative;z-index:2;max-width:650px}
-
-.badge{
- display:inline-flex;
- background:rgba(244,180,0,.12);
- border:1px solid rgba(244,180,0,.3);
- color:var(--gold2);
- padding:7px 13px;
- border-radius:30px;
- font-size:13px;
- font-weight:800;
- margin-bottom:18px;
-}
-
-.hero h1{
- font-size:48px;
- line-height:1.25;
- margin-bottom:14px;
-}
-
-.hero h1 span{
- color:var(--gold);
-}
-
-.hero p{
- color:#b9bec7;
- line-height:1.9;
- font-size:16px;
- margin-bottom:25px;
-}
-
-.primary{
- background:linear-gradient(135deg,#ffd65a,#e69b00);
- color:#111;
- padding:13px 22px;
- border-radius:12px;
- font-weight:900;
- box-shadow:0 10px 30px rgba(244,180,0,.18);
-}
-
-.secondary{
- background:#181b22;
- border:1px solid var(--border);
- color:white;
- padding:13px 22px;
- border-radius:12px;
- font-weight:800;
- margin-right:8px;
-}
-
-.primary:hover,.secondary:hover{transform:translateY(-2px)}
-
-.heroVisual{
- position:absolute;
- left:70px;
- top:45px;
- width:300px;
- height:245px;
- transform:rotate(-5deg);
- opacity:.95;
-}
-
-.fakeCard{
- position:absolute;
- width:250px;
- height:155px;
- border-radius:20px;
- padding:20px;
- background:linear-gradient(135deg,#f4b400,#6d4300);
- box-shadow:0 25px 60px rgba(0,0,0,.4);
-}
-
-.fakeCard.two{
- right:0;
- top:75px;
- transform:rotate(13deg);
- background:linear-gradient(135deg,#242832,#08090b);
- border:1px solid rgba(255,255,255,.15);
-}
-
-.fakeCard b{
- font-size:18px;
-}
-
-.fakeCard small{
- display:block;
- margin-top:55px;
- opacity:.75;
-}
-
-.stats{
- max-width:1250px;
- margin:20px auto;
- padding:0 20px;
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:13px;
-}
-
-.stat{
- background:var(--card);
- border:1px solid var(--border);
- border-radius:17px;
- padding:18px;
- display:flex;
- align-items:center;
- gap:14px;
-}
-
-.statIcon{
- width:45px;height:45px;
- border-radius:13px;
- display:grid;
- place-items:center;
- background:rgba(244,180,0,.12);
- color:var(--gold);
- font-size:21px;
-}
-
-.stat b{font-size:20px}
-.stat small{display:block;color:var(--muted)}
-
-.container{
- max-width:1250px;
- margin:35px auto;
- padding:0 20px;
-}
-
-.sectionHead{
- display:flex;
- justify-content:space-between;
- align-items:end;
- gap:15px;
- margin-bottom:18px;
-}
-
-.sectionHead h2{font-size:27px}
-.sectionHead p{color:var(--muted);font-size:13px}
-
-.categories{
- display:flex;
- gap:8px;
- overflow:auto;
- padding-bottom:5px;
- margin-bottom:22px;
-}
-
-.cat{
- white-space:nowrap;
- padding:10px 18px;
- border-radius:30px;
- background:#12151b;
- color:#b7bdc6;
- border:1px solid var(--border);
- font-weight:800;
-}
-
-.cat.active,.cat:hover{
- background:var(--gold);
- color:#111;
-}
-
-.products{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:16px;
-}
-
-.product{
- background:linear-gradient(180deg,#12151b,#0e1015);
- border:1px solid var(--border);
- border-radius:20px;
- overflow:hidden;
- transition:.25s;
- position:relative;
-}
-
-.product:hover{
- transform:translateY(-5px);
- border-color:rgba(244,180,0,.45);
- box-shadow:0 18px 50px rgba(0,0,0,.25);
-}
-
-.productVisual{
- height:175px;
- position:relative;
- overflow:hidden;
- display:flex;
- align-items:center;
- justify-content:center;
-}
-
-.productVisual:before{
- content:"";
- position:absolute;
- width:170px;height:170px;
- border-radius:50%;
- background:rgba(255,255,255,.12);
- filter:blur(2px);
-}
-
-.productVisual.game{background:linear-gradient(135deg,#3817a4,#09122e)}
-.productVisual.ps{background:linear-gradient(135deg,#075bd5,#07152d)}
-.productVisual.steam{background:linear-gradient(135deg,#142f47,#071018)}
-.productVisual.visa{background:linear-gradient(135deg,#1e1e28,#4c2d94)}
-.productVisual.master{background:linear-gradient(135deg,#d45115,#3b1110)}
-.productVisual.netflix{background:linear-gradient(135deg,#b90019,#250008)}
-.productVisual.apple{background:linear-gradient(135deg,#555,#111)}
-.productVisual.google{background:linear-gradient(135deg,#1676e8,#092650)}
-.productVisual.xbox{background:linear-gradient(135deg,#107c10,#041804)}
-.productVisual.roblox{background:linear-gradient(135deg,#222,#090909)}
-
-.visualLogo{
- position:relative;
- z-index:2;
- width:100px;height:100px;
- border-radius:25px;
- background:rgba(255,255,255,.1);
- border:1px solid rgba(255,255,255,.2);
- display:grid;
- place-items:center;
- font-size:43px;
- font-weight:900;
- backdrop-filter:blur(8px);
- box-shadow:0 15px 35px rgba(0,0,0,.3);
-}
-
-.visualText{
- position:absolute;
- z-index:3;
- bottom:13px;
- right:14px;
- left:14px;
- font-size:18px;
- font-weight:900;
-}
-
-.demo{
- position:absolute;
- top:12px;
- left:12px;
- z-index:4;
- background:rgba(0,0,0,.55);
- color:#ffd65a;
- border:1px solid rgba(255,214,90,.25);
- padding:4px 8px;
- border-radius:7px;
- font-size:10px;
- font-weight:900;
-}
-
-.productBody{padding:15px}
-
-.productBody h3{
- font-size:16px;
- margin-bottom:5px;
-}
-
-.productBody p{
- color:var(--muted);
- font-size:12px;
- min-height:38px;
-}
-
-.priceRow{
- display:flex;
- align-items:center;
- justify-content:space-between;
- margin-top:13px;
-}
-
-.price{
- color:var(--gold2);
- font-size:19px;
- font-weight:900;
-}
-
-.buy{
- padding:9px 14px;
- border-radius:10px;
- background:var(--gold);
- color:#111;
- font-weight:900;
-}
-
-.buy:hover{background:#ffd65a}
-
-.features{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:15px;
- margin-top:40px;
-}
-
-.feature{
- padding:25px;
- border-radius:18px;
- background:linear-gradient(135deg,#12151b,#0d0f13);
- border:1px solid var(--border);
-}
-
-.featureIcon{
- font-size:28px;
- color:var(--gold);
- margin-bottom:12px;
-}
-
-.feature h3{margin-bottom:7px}
-.feature p{color:var(--muted);line-height:1.8;font-size:13px}
-
-footer{
- margin-top:60px;
- border-top:1px solid var(--border);
- padding:35px 20px;
- text-align:center;
- color:var(--muted);
-}
-
-footer b{color:var(--gold)}
-
-.overlay{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.72);
- backdrop-filter:blur(7px);
- display:none;
- align-items:center;
- justify-content:center;
- z-index:100;
- padding:15px;
-}
-
-.overlay.show{display:flex}
-
-.modal{
- width:min(480px,100%);
- background:#11141a;
- border:1px solid rgba(255,255,255,.1);
- border-radius:22px;
- box-shadow:0 30px 100px rgba(0,0,0,.55);
- overflow:hidden;
-}
-
-.modalHead{
- padding:18px 20px;
- border-bottom:1px solid var(--border);
- display:flex;
- align-items:center;
- justify-content:space-between;
-}
-
-.modalHead h3{font-size:19px}
-
-.close{
- width:36px;height:36px;
- border-radius:10px;
- background:#1b1f27;
- color:white;
- font-size:20px;
-}
-
-.modalBody{padding:22px}
-
-.input{
- width:100%;
- background:#090b0f;
- border:1px solid var(--border);
- color:white;
- outline:none;
- padding:13px;
- border-radius:11px;
- margin-bottom:12px;
-}
-
-.input:focus{border-color:var(--gold)}
-
-.full{width:100%}
-
-.paymentGrid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
- margin:15px 0;
-}
-
-.pay{
- background:#181b22;
- border:1px solid var(--border);
- color:white;
- padding:17px 10px;
- border-radius:13px;
- font-weight:800;
-}
-
-.pay:hover{border-color:var(--gold)}
-
-.cartItem{
- display:flex;
- justify-content:space-between;
- padding:13px 0;
- border-bottom:1px solid var(--border);
-}
-
-.empty{
- text-align:center;
- color:var(--muted);
- padding:30px 10px;
-}
-
-.toast{
- position:fixed;
- left:20px;
- bottom:20px;
- z-index:300;
- background:#151820;
- border:1px solid rgba(244,180,0,.3);
- color:white;
- padding:13px 17px;
- border-radius:12px;
- box-shadow:0 15px 40px rgba(0,0,0,.4);
- transform:translateY(100px);
- opacity:0;
- transition:.3s;
-}
-
-.toast.show{
- transform:translateY(0);
- opacity:1;
-}
-
-@media(max-width:1050px){
- .products{grid-template-columns:repeat(3,1fr)}
- .heroVisual{opacity:.35;left:20px}
- .search{width:170px}
-}
-
-@media(max-width:800px){
- nav{
-  display:none;
-  position:absolute;
-  top:76px;
-  right:10px;
-  left:10px;
-  background:#101217;
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:10px;
-  flex-direction:column;
- }
-
- nav.open{display:flex}
-
- .menuBtn{display:block}
- .search{display:none}
- .stats{grid-template-columns:1fr 1fr}
- .products{grid-template-columns:repeat(2,1fr)}
- .heroBox{padding:35px 25px;min-height:390px}
- .hero h1{font-size:35px}
- .heroVisual{display:none}
- .features{grid-template-columns:1fr}
-}
-
-@media(max-width:520px){
- .nav{padding:0 12px}
- .logo{font-size:18px}
- .logoBox{width:38px;height:38px}
- .action{min-width:39px;height:39px}
- .stats{grid-template-columns:1fr 1fr}
- .stat{padding:12px}
- .stat b{font-size:16px}
- .products{gap:10px}
- .productVisual{height:145px}
- .visualLogo{width:78px;height:78px;font-size:32px}
- .productBody{padding:11px}
- .productBody h3{font-size:14px}
- .price{font-size:16px}
- .buy{padding:8px 10px;font-size:12px}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROVEX CARD - متجر البطاقات الرقمية والشحن الفوري</title>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("Nu45_d-5zAgxoEVAw");
+       })();
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #0b1329;
+            --card-bg: #1c2541;
+            --accent-color: #3a86ff;
+            --accent-hover: #2563eb;
+            --text-color: #ffffff;
+            --text-muted: #94a3b8;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #2a3859;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--accent-color);
+            font-size: 2.8rem;
+            margin: 0;
+            text-shadow: 0 0 15px rgba(58, 134, 255, 0.4);
+        }
+
+        /* شريط المحفظة والرصيد */
+        .wallet-bar {
+            background-color: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .wallet-info {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .wallet-info span {
+            color: var(--success-color);
+            font-size: 1.4rem;
+        }
+
+        .btn-charge {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-charge:hover {
+            background-color: #059669;
+        }
+
+        /* نافذة التوثيق */
+        .auth-container {
+            max-width: 480px;
+            margin: 0 auto 40px auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #3a86ff44;
+        }
+
+        .auth-container h2 {
+            margin-top: 0;
+            color: var(--accent-color);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #3a3b64;
+            background-color: #0b1329;
+            color: white;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .spam-warning {
+            background-color: rgba(245, 158, 11, 0.15);
+            border: 2px dashed var(--warning-color);
+            color: #fcd34d;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3a86ff;
+            text-shadow: 0 0 10px rgba(58, 134, 255, 0.5);
+        }
+
+        .status-msg {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .status-msg.success { color: var(--success-color); }
+        .status-msg.error { color: var(--error-color); }
+
+        .hidden { display: none; }
+
+        .section-title {
+            color: var(--accent-color);
+            border-right: 4px solid var(--accent-color);
+            padding-right: 12px;
+            margin: 40px 0 20px 0;
+            font-size: 1.6rem;
+        }
+
+        /* جعل العرض منتجين فقط في كل سطر */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card-item {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #2a3859;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .card-img {
+            width: 100%;
+            max-height: 140px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background: #0b1329;
+            padding: 5px;
+        }
+
+        .card-item h3 {
+            margin: 5px 0;
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .card-item p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 0 0 10px 0;
+        }
+
+        .card-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--success-color);
+            margin-bottom: 12px;
+        }
+
+        /* نافذة الدفع */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 420px;
+            border: 1px solid var(--accent-color);
+        }
+
+        .payment-option {
+            background-color: #0b1329;
+            border: 1px solid #3a3b64;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .payment-option:hover {
+            border-color: var(--accent-color);
+            background-color: #162244;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid #2a3859;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="topbar">
- 🔥 ROVEX CARD — متجر تجريبي للبطاقات الرقمية والشحن • جميع المنتجات الحالية للتجربة
+<div class="container">
+    <header>
+        <h1>ROVEX CARD</h1>
+        <p>متجر البطاقات الرقمية والشحن الفوري</p>
+    </header>
+
+    <!-- قسم التحقق وتأكيد البريد -->
+    <div class="auth-container" id="authSection">
+        <h2>تسجيل الدخول / التوثيق</h2>
+        
+        <div id="stepSendOtp">
+            <div class="form-group">
+                <label for="userEmail">أدخل بريدك الإلكتروني لفتح المتجر:</label>
+                <input type="email" id="userEmail" placeholder="example@domain.com" required>
+            </div>
+            <button class="btn" onclick="sendOTP()">إرسال رمز التحقق OTP</button>
+
+            <div class="spam-warning">
+                ⚠️ تنبيه مهم جداً: <br>
+                إذا لم تجد الرمز في صندوق الوارد، يرجى فحص مجلد <b>الرسائل غير المرغوب فيها (Spam / Junk)</b>!
+            </div>
+        </div>
+
+        <div id="stepVerifyOtp" class="hidden">
+            <div class="form-group">
+                <label for="otpInput">أدخل رمز التحقق (OTP):</label>
+                <input type="text" id="otpInput" maxlength="6" placeholder="123456" required>
+            </div>
+            <button class="btn" onclick="verifyOTP()">تأكيد الرمز ودخول المتجر</button>
+        </div>
+
+        <div id="statusMessage" class="status-msg"></div>
+
+        <div class="signature">
+            مـ؏ ﺗـﺣـﻳـﺎﺗـي ⊱ ﻣـﺎﻟـگ ⊰
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي بعد التوثيق -->
+    <div id="storeContent" class="hidden">
+
+        <!-- شريط المحفظة الشغال -->
+        <div class="wallet-bar">
+            <div class="wallet-info">
+                رصيد المحفظة الحالي: <span id="walletBalance">$0.00</span>
+            </div>
+            <button class="btn-charge" onclick="openChargeWallet()">+ شحن المحفظة</button>
+        </div>
+
+        <!-- ببجي -->
+        <h2 class="section-title">🔥 شدات ببجي موبايل (PUBG Mobile UC)</h2>
+        <div class="cards-grid">
+            <div class="card-item">
+                <img src="https://img.utdstc.com/icon/417/360/4173602148ed382c49a37ad9e7769996d99763c3298fa63b2f56be87994b70db:200" class="card-img" alt="PUBG 60">
+                <h3>60 شدة UC</h3>
+                <p>شحن عن طريق الأيدي ID</p>
+                <div class="card-price">$0.99</div>
+                <button class="btn" onclick="openPayment('60 UC PUBG', 0.99)">شراء الآن</button>
+            </div>
+            <div class="card-item">
+                <img src="https://img.utdstc.com/icon/417/360/4173602148ed382c49a37ad9e7769996d99763c3298fa63b2f56be87994b70db:200" class="card-img" alt="PUBG 325">
+                <h3>325 شدة UC</h3>
+                <p>شحن عن طريق الأيدي ID</p>
+                <div class="card-price">$4.99</div>
+                <button class="btn" onclick="openPayment('325 UC PUBG', 4.99)">شراء الآن</button>
+            </div>
+            <div class="card-item">
+                <img src="https://img.utdstc.com/icon/417/360/4173602148ed382c49a37ad9e7769996d99763c3298fa63b2f56be87994b70db:200" class="card-img" alt="PUBG 660">
+                <h3>660 شدة UC</h3>
+                <p>شحن عن طريق الأيدي ID</p>
+                <div class="card-price">$9.99</div>
+                <button class="btn" onclick="openPayment('660 UC PUBG', 9.99)">شراء الآن</button>
+            </div>
+            <div class="card-item">
+                <img src="https://img.utdstc.com/icon/417/360/4173602148ed382c49a37ad9e7769996d99763c3298fa63b2f56be87994b70db:200" class="card-img" alt="PUBG 1800">
+                <h3>1800 شدة UC</h3>
+                <p>شحن عن طريق الأيدي ID</p>
+                <div class="card-price">$24.99</div>
+                <button class="btn" onclick="openPayment('1800 UC PUBG', 24.99)">شراء الآن</button>
+            </div>
+        </div>
+
+        <!-- الفيزا -->
+        <h2 class="section-title">💳 بطاقات الفيزا والماستركارد</h2>
+        <div class="cards-grid">
+            <div class="card-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png" class="card-img" alt="Visa $5">
+                <h3>بطاقة فيزا افتراضية $5</h3>
+                <p>تفعيل ومشتريات أونلاين</p>
+                <div class="card-price">$6.50</div>
+                <button class="btn" onclick="openPayment('Visa Virtual $5', 6.50)">شراء الآن</button>
+            </div>
+            <div class="card-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1200px-Mastercard-logo.svg.png" class="card-img" alt="Mastercard $25">
+                <h3>ماستركارد مشحونة $25</h3>
+                <p>صلاحية عالمية كاملة</p>
+                <div class="card-price">$28.00</div>
+                <button class="btn" onclick="openPayment('Mastercard $25', 28.00)">شراء الآن</button>
+            </div>
+        </div>
+
+        <!-- فري فاير -->
+        <h2 class="section-title">💎 جواهر فري فاير</h2>
+        <div class="cards-grid">
+            <div class="card-item">
+                <img src="https://play-lh.googleusercontent.com/WW43zUsp6C7bF6XwRpxH2w3E9C1JpP6l9sXQ8h8K41zR=w240-h380" class="card-img" alt="FF 110">
+                <h3>110 جوهرة</h3>
+                <p>شحن عبر المعرف ID</p>
+                <div class="card-price">$1.00</div>
+                <button class="btn" onclick="openPayment('Free Fire 110 Gems', 1.00)">شراء الآن</button>
+            </div>
+            <div class="card-item">
+                <img src="https://play-lh.googleusercontent.com/WW43zUsp6C7bF6XwRpxH2w3E9C1JpP6l9sXQ8h8K41zR=w240-h380" class="card-img" alt="FF 583">
+                <h3>583 جوهرة</h3>
+                <p>شحن عبر المعرف ID</p>
+                <div class="card-price">$5.00</div>
+                <button class="btn" onclick="openPayment('Free Fire 583 Gems', 5.00)">شراء الآن</button>
+            </div>
+        </div>
+
+        <footer>
+            <div class="signature">
+                مـ؏ ﺗـﺣـﻳـﺎﺗـي ⊱ ﻣـﺎﻟـگ ⊰
+            </div>
+        </footer>
+
+    </div>
 </div>
 
-<header>
-<div class="nav">
-
-<button class="action menuBtn" onclick="toggleMenu()">☰</button>
-
-<div class="logo">
- <div class="logoBox"><span>R</span></div>
- ROVEX CARD
+<!-- نافذة الشراء والمحفظة Modal -->
+<div id="paymentModal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <h3 id="modalItemName">خيارات الدفع</h3>
+        <p style="text-align: center; color: var(--success-color); font-weight: bold; font-size: 1.2rem;" id="modalItemPrice"></p>
+        
+        <div class="payment-option" onclick="payWithWallet()">👛 الدفع بواسطة المحفظة</div>
+        <div class="payment-option" onclick="processPayment('Visa/Mastercard')">💳 بطاقة فيزا / ماستركارد</div>
+        <div class="payment-option" onclick="processPayment('USDT Crypto')">🪙 عملات رقمية (USDT TRC20)</div>
+        <div class="payment-option" onclick="processPayment('WhatsApp Direct')">💬 الدفع المباشر عبر الواتساب</div>
+        
+        <button class="btn" style="background-color: #64748b; margin-top: 15px;" onclick="closePayment()">إلغاء</button>
+    </div>
 </div>
-
-<nav id="nav">
- <button class="active" onclick="filterProducts('all',this)">الرئيسية</button>
- <button onclick="filterProducts('games',this)">الألعاب</button>
- <button onclick="filterProducts('cards',this)">البطاقات</button>
- <button onclick="filterProducts('subscriptions',this)">الاشتراكات</button>
- <button onclick="showOrders()">طلباتي</button>
-</nav>
-
-<div class="search">
- <span>⌕</span>
- <input id="searchInput" oninput="searchProducts()" placeholder="ابحث عن منتج...">
-</div>
-
-<div class="navActions">
- <button class="action" onclick="showWallet()">💰</button>
- <button class="action" onclick="showCart()">🛒 <small id="cartCount">0</small></button>
- <button class="action" onclick="showLogin()">👤</button>
-</div>
-
-</div>
-</header>
-
-<main>
-
-<section class="hero">
-<div class="heroBox">
-
-<div class="heroText">
- <div class="badge">⚡ DIGITAL STORE</div>
-
- <h1>
- كل شحناتك الرقمية<br>
- <span>في مكان واحد</span>
- </h1>
-
- <p>
- ROVEX CARD منصة تجريبية لبيع البطاقات الرقمية،
- شحن الألعاب والاشتراكات بتصميم متجر حقيقي وسهل الاستخدام.
- </p>
-
- <button class="primary" onclick="scrollToProducts()">تصفح المنتجات 🛒</button>
- <button class="secondary" onclick="showLogin()">حسابي 👤</button>
-</div>
-
-<div class="heroVisual">
- <div class="fakeCard">
-  <b>ROVEX CARD</b>
-  <small>PREPAID DIGITAL</small>
- </div>
- <div class="fakeCard two">
-  <b>ROVEX</b>
-  <small>DIGITAL STORE</small>
- </div>
-</div>
-
-</div>
-</section>
-
-<section class="stats">
-
-<div class="stat">
- <div class="statIcon">⚡</div>
- <div><b>فوري</b><small>تسليم رقمي</small></div>
-</div>
-
-<div class="stat">
- <div class="statIcon">🛡️</div>
- <div><b>آمن</b><small>نظام حماية</small></div>
-</div>
-
-<div class="stat">
- <div class="statIcon">🎮</div>
- <div><b>100+</b><small>تصنيف مستقبلي</small></div>
-</div>
-
-<div class="stat">
- <div class="statIcon">💳</div>
- <div><b>24/7</b><small>متجر متاح</small></div>
-</div>
-
-</section>
-
-<section class="container" id="productsSection">
-
-<div class="sectionHead">
- <div>
-  <h2>🔥 المنتجات</h2>
-  <p>منتجات تجريبية لعرض شكل المتجر قبل ربط المورد الحقيقي</p>
- </div>
-</div>
-
-<div class="categories">
- <button class="cat active" onclick="filterProducts('all',this)">الكل</button>
- <button class="cat" onclick="filterProducts('games',this)">🎮 ألعاب</button>
- <button class="cat" onclick="filterProducts('cards',this)">💳 بطاقات</button>
- <button class="cat" onclick="filterProducts('subscriptions',this)">📺 اشتراكات</button>
-</div>
-
-<div class="products" id="products"></div>
-
-<div class="features">
-
-<div class="feature">
- <div class="featureIcon">⚡</div>
- <h3>تسليم سريع</h3>
- <p>تصميم النظام مجهز ليتم ربطه لاحقًا بتسليم المنتجات تلقائيًا عن طريق API.</p>
-</div>
-
-<div class="feature">
- <div class="featureIcon">🔐</div>
- <h3>حساب المستخدم</h3>
- <p>واجهة حساب ومحفظة وطلبات جاهزة للتطوير وربطها بقاعدة بيانات حقيقية.</p>
-</div>
-
-<div class="feature">
- <div class="featureIcon">🌍</div>
- <h3>متجر رقمي</h3>
- <p>التصميم قابل لإضافة مئات المنتجات والتصنيفات بدون تغيير شكل المتجر.</p>
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-<footer>
- <b>ROVEX CARD</b> © 2026 — متجر رقمي تجريبي
- <br>
- <small>المنتجات والأسعار الحالية وهمية لأغراض اختبار التصميم فقط.</small>
-</footer>
-
-<!-- LOGIN -->
-
-<div class="overlay" id="loginModal">
-<div class="modal">
-
-<div class="modalHead">
- <h3>👤 تسجيل الدخول</h3>
- <button class="close" onclick="closeModal('loginModal')">×</button>
-</div>
-
-<div class="modalBody">
- <p style="color:#aaa;font-size:13px;margin-bottom:15px">
- تسجيل دخول تجريبي — يمكن استبداله بنظام OTP الحقيقي لاحقًا.
- </p>
-
- <input class="input" id="phone" placeholder="رقم الهاتف">
- <button class="primary full" onclick="demoLogin()">متابعة</button>
-</div>
-
-</div>
-</div>
-
-<!-- WALLET -->
-
-<div class="overlay" id="walletModal">
-<div class="modal">
-
-<div class="modalHead">
- <h3>💰 محفظتي</h3>
- <button class="close" onclick="closeModal('walletModal')">×</button>
-</div>
-
-<div class="modalBody" style="text-align:center">
-
-<div style="font-size:13px;color:#999">الرصيد التجريبي</div>
-<div style="font-size:38px;font-weight:900;color:#ffd65a;margin:8px">
- $<span id="balance">0.00</span>
-</div>
-
-<button class="primary full" onclick="showPayment()">
- + إضافة رصيد
-</button>
-
-</div>
-</div>
-</div>
-
-<!-- PAYMENT -->
-
-<div class="overlay" id="paymentModal">
-<div class="modal">
-
-<div class="modalHead">
- <h3>💳 إضافة رصيد</h3>
- <button class="close" onclick="closeModal('paymentModal')">×</button>
-</div>
-
-<div class="modalBody">
-
-<input class="input" id="amount" type="number" placeholder="المبلغ بالدولار">
-
-<div class="paymentGrid">
- <button class="pay" onclick="fakePayment('Binance')">🟡 Binance</button>
- <button class="pay" onclick="fakePayment('Bybit')">🔵 Bybit</button>
- <button class="pay" onclick="fakePayment('USDT')">₮ USDT</button>
- <button class="pay" onclick="fakePayment('رصيد')">📱 رصيد</button>
-</div>
-
-<p style="font-size:11px;color:#777;text-align:center">
- هذه خيارات تجريبية ولن يتم خصم أي أموال.
-</p>
-
-</div>
-</div>
-</div>
-
-<!-- CART -->
-
-<div class="overlay" id="cartModal">
-<div class="modal">
-
-<div class="modalHead">
- <h3>🛒 السلة</h3>
- <button class="close" onclick="closeModal('cartModal')">×</button>
-</div>
-
-<div class="modalBody">
- <div id="cartItems"></div>
-
- <div style="display:flex;justify-content:space-between;margin:18px 0;font-weight:900">
-  <span>المجموع</span>
-  <span style="color:#ffd65a">$<span id="cartTotal">0.00</span></span>
- </div>
-
- <button class="primary full" onclick="checkout()">إتمام الطلب</button>
-</div>
-
-</div>
-</div>
-
-<!-- ORDERS -->
-
-<div class="overlay" id="ordersModal">
-<div class="modal">
-
-<div class="modalHead">
- <h3>📦 طلباتي</h3>
- <button class="close" onclick="closeModal('ordersModal')">×</button>
-</div>
-
-<div class="modalBody" id="ordersList">
- <div class="empty">لا توجد طلبات حتى الآن.</div>
-</div>
-
-</div>
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
+    let generatedOTP = null;
+    let selectedItem = '';
+    let selectedPrice = 0;
+    let walletBalance = 0.00;
 
-const products = [
+    function updateWalletUI() {
+        document.getElementById('walletBalance').innerText = '$' + walletBalance.toFixed(2);
+    }
 
- {id:1,name:"PlayStation Store",desc:"بطاقة PlayStation رقمية تجريبية",price:10,cat:"games",type:"ps",logo:"PS"},
- {id:2,name:"Steam Wallet",desc:"رصيد Steam رقمي تجريبي",price:10,cat:"games",type:"steam",logo:"S"},
- {id:3,name:"PUBG Mobile",desc:"شحن UC تجريبي للعبة PUBG",price:5,cat:"games",type:"game",logo:"UC"},
- {id:4,name:"Free Fire",desc:"شحن Diamonds تجريبي",price:5,cat:"games",type:"game",logo:"FF"},
- {id:5,name:"Xbox Gift Card",desc:"بطاقة Xbox رقمية تجريبية",price:15,cat:"games",type:"xbox",logo:"X"},
- {id:6,name:"Roblox Gift Card",desc:"بطاقة Roblox رقمية تجريبية",price:10,cat:"games",type:"roblox",logo:"R"},
- {id:7,name:"Visa Digital",desc:"بطاقة Visa رقمية تجريبية",price:20,cat:"cards",type:"visa",logo:"VISA"},
- {id:8,name:"Mastercard Digital",desc:"بطاقة Mastercard تجريبية",price:20,cat:"cards",type:"master",logo:"MC"},
- {id:9,name:"Apple Gift Card",desc:"بطاقة Apple رقمية تجريبية",price:10,cat:"cards",type:"apple",logo:""},
- {id:10,name:"Google Play",desc:"رصيد Google Play تجريبي",price:10,cat:"cards",type:"google",logo:"▶"},
- {id:11,name:"Netflix",desc:"اشتراك Netflix تجريبي",price:8,cat:"subscriptions",type:"netflix",logo:"N"},
- {id:12,name:"Netflix Premium",desc:"خطة Premium تجريبية",price:15,cat:"subscriptions",type:"netflix",logo:"N"}
-];
+    function openChargeWallet() {
+        let amount = prompt("أدخل المبلغ الذي تريد شحنه في المحفظة ($):", "10");
+        if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
+            walletBalance += parseFloat(amount);
+            updateWalletUI();
+            alert("تم شحن محفظتك بمبلغ $" + parseFloat(amount).toFixed(2) + " بنجاح!");
+        }
+    }
 
-let cart=[];
-let orders=[];
-let currentFilter="all";
+    function showStatus(msg, isError = false) {
+        const statusEl = document.getElementById('statusMessage');
+        statusEl.innerText = msg;
+        statusEl.className = isError ? 'status-msg error' : 'status-msg success';
+    }
 
-function renderProducts(){
+    function sendOTP() {
+        const email = document.getElementById('userEmail').value;
+        if (!email) {
+            showStatus('يرجى إدخال البريد الإلكتروني أولاً!', true);
+            return;
+        }
 
- const box=document.getElementById("products");
- const search=document.getElementById("searchInput").value.toLowerCase();
+        generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+        showStatus('جاري إرسال الرمز إلى بريدك الإلكتروني...');
 
- let list=products.filter(p=>{
-  const category=currentFilter==="all" || p.cat===currentFilter;
-  const text=p.name.toLowerCase().includes(search) ||
-             p.desc.toLowerCase().includes(search);
-  return category && text;
- });
+        const templateParams = {
+            "email": email,
+            "to_email": email,
+            "otp_code": generatedOTP,
+            "name": "عميل ROVEX",
+            "title": "رمز التحقق الخاص بـ ROVEX CARD"
+        };
 
- if(!list.length){
-  box.innerHTML='<div class="empty" style="grid-column:1/-1">لا توجد منتجات مطابقة 🔎</div>';
-  return;
- }
+        emailjs.send('service_odka0lu', 'template_xsmjqd8', templateParams)
+            .then(function() {
+                showStatus('تم إرسال الرمز بنجاح! تفقد صندوق الوارد أو مجلد Spam.');
+                document.getElementById('stepSendOtp').classList.add('hidden');
+                document.getElementById('stepVerifyOtp').classList.remove('hidden');
+            }, function(error) {
+                console.error(error);
+                showStatus('حدث خطأ أثناء الإرسال. يرجى التاكد من الإيميل وإعادة المحاولة.', true);
+            });
+    }
 
- box.innerHTML=list.map(p=>`
+    function verifyOTP() {
+        const userOtp = document.getElementById('otpInput').value;
+        if (userOtp === generatedOTP) {
+            showStatus('تم التحقق بنجاح! مرحباً بك في متجر ROVEX CARD.');
+            setTimeout(() => {
+                document.getElementById('authSection').classList.add('hidden');
+                document.getElementById('storeContent').classList.remove('hidden');
+            }, 1000);
+        } else {
+            showStatus('رمز التحقق غير صحيح، يرجى إعادة المحاولة.', true);
+        }
+    }
 
- <article class="product">
+    function openPayment(itemName, price) {
+        selectedItem = itemName;
+        selectedPrice = price;
+        document.getElementById('modalItemName').innerText = 'شراء: ' + itemName;
+        document.getElementById('modalItemPrice').innerText = 'السعر: $' + price.toFixed(2);
+        document.getElementById('paymentModal').classList.remove('hidden');
+    }
 
-  <div class="productVisual ${p.type}">
+    function closePayment() {
+        document.getElementById('paymentModal').classList.add('hidden');
+    }
 
-   <div class="demo">تجريبي</div>
+    function payWithWallet() {
+        if (walletBalance >= selectedPrice) {
+            walletBalance -= selectedPrice;
+            updateWalletUI();
+            alert('تم الخصم من المحفظة بنجاح! تم شراء ' + selectedItem + ' وستصلك التفاصيل فوراً.');
+            closePayment();
+        } else {
+            alert('رصيد المحفظة غير كافٍ! يرجى شحن المحفظة أولاً.');
+        }
+    }
 
-   <div class="visualLogo">${p.logo}</div>
+    function processPayment(method) {
+        let playerID = prompt("يرجى إدخال الآيدي (ID) أو البريد لاستلام الطلب:");
+        if (playerID) {
+            alert('تم تقديم طلبك بنجاح عبر (' + method + ') لـ ' + selectedItem + '\nتم ربط الطلب بالمعرف: ' + playerID);
+            closePayment();
+        }
+    }
+</script>
 
-   <div class="visualText">${p.name}</div>
+</body>
+                 </html>
 
-  </div>
-
-  <div class="productBody">
-
-   <h3>${p.name}</h3>
-
-   <p>${p.desc}</p>
-
-   <div class="priceRow">
-
-    <div class="price">$${p.price.toFixed(2)}</div>
-
-    <button class="buy" onclick="addToCart(${p.id})">
-     شراء
-    </button>
-
-   </div>
-
-  </di
