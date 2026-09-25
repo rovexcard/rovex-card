@@ -230,18 +230,23 @@
             return;
         }
 
-        // توليد رمز مكون من 6 أرقام
         generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
         showStatus('جاري إرسال الرمز إلى بريدك الإلكتروني...');
 
-        // معلمات الرسالة لـ EmailJS
+        // تم ربط الكلمات هنا بنفس الكلمات العربية الموجودة في لوحة EmailJS تماماً
         const templateParams = {
-            email: email,
-            otp_code: generatedOTP
+            "بريد إلكتروني": email,
+            "email": email,
+            "to_email": email,
+            "رمز التحقق من كلمة المرور": generatedOTP,
+            "otp_code": generatedOTP,
+            "اسم": "عميل ROVEX",
+            "name": "عميل ROVEX",
+            "عنوان": "رمز التحقق الخاصة بـ ROVEX",
+            "title": "رمز التحقق الخاصة بـ ROVEX"
         };
 
-        // تم تحديث معرف الخدمة هنا إلى service_odka0lu
         emailjs.send('service_odka0lu', 'template_xsmjqd8', templateParams)
             .then(function(response) {
                 showStatus('تم إرسال رمز التحقق بنجاح! يرجى تفقد بريدك الإلكتروني.');
