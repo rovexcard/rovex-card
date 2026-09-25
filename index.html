@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROVEX CARD - متجر البطاقات الرقمية والشحن الفوري</title>
     
-    <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
        (function(){
@@ -36,31 +35,62 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            padding: 30px 0;
+            padding: 20px 0;
             border-bottom: 2px solid #2a3859;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         header h1 {
             color: var(--accent-color);
             font-size: 2.8rem;
-            margin: 0 0 10px 0;
+            margin: 0;
             text-shadow: 0 0 15px rgba(58, 134, 255, 0.4);
         }
 
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin: 0;
+        /* شريط المحفظة والرصيد */
+        .wallet-bar {
+            background-color: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
-        /* نافذة تسجيل الدخول والتوثيق */
+        .wallet-info {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .wallet-info span {
+            color: var(--success-color);
+            font-size: 1.4rem;
+        }
+
+        .btn-charge {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-charge:hover {
+            background-color: #059669;
+        }
+
+        /* نافذة التوثيق */
         .auth-container {
             max-width: 480px;
             margin: 0 auto 40px auto;
@@ -116,7 +146,6 @@
             background-color: var(--accent-hover);
         }
 
-        /* التنبيه المكتوب بخط غليظ وكبير للمستخدم */
         .spam-warning {
             background-color: rgba(245, 158, 11, 0.15);
             border: 2px dashed var(--warning-color);
@@ -128,6 +157,15 @@
             font-weight: 800;
             text-align: center;
             line-height: 1.5;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3a86ff;
+            text-shadow: 0 0 10px rgba(58, 134, 255, 0.5);
         }
 
         .status-msg {
@@ -142,28 +180,37 @@
 
         .hidden { display: none; }
 
-        /* الأقسام والمنتجات */
         .section-title {
             color: var(--accent-color);
             border-right: 4px solid var(--accent-color);
             padding-right: 12px;
             margin: 40px 0 20px 0;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
+        /* جعل العرض منتجين فقط في كل سطر */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .card-item {
             background-color: var(--card-bg);
             border-radius: 12px;
-            padding: 20px;
+            padding: 15px;
             border: 1px solid #2a3859;
             text-align: center;
             transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .card-item:hover {
@@ -171,29 +218,40 @@
             border-color: var(--accent-color);
         }
 
+        .card-img {
+            width: 100%;
+            max-height: 140px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background: #0b1329;
+            padding: 5px;
+        }
+
         .card-item h3 {
-            margin-top: 0;
+            margin: 5px 0;
             color: #ffffff;
             font-size: 1.2rem;
         }
 
         .card-item p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin: 0 0 10px 0;
         }
 
         .card-price {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: var(--success-color);
-            margin: 15px 0;
+            margin-bottom: 12px;
         }
 
-        /* نافذة خيارات الدفع Modal */
+        /* نافذة الدفع */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -205,14 +263,8 @@
             padding: 25px;
             border-radius: 12px;
             width: 90%;
-            max-width: 400px;
+            max-width: 420px;
             border: 1px solid var(--accent-color);
-        }
-
-        .modal-content h3 {
-            margin-top: 0;
-            color: var(--accent-color);
-            text-align: center;
         }
 
         .payment-option {
@@ -231,6 +283,13 @@
             border-color: var(--accent-color);
             background-color: #162244;
         }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid #2a3859;
+        }
     </style>
 </head>
 <body>
@@ -238,7 +297,7 @@
 <div class="container">
     <header>
         <h1>ROVEX CARD</h1>
-        <p>المنصة المعتمدة لشحن الألعاب والبطاقات الرقمية والفيزا</p>
+        <p>متجر البطاقات الرقمية والشحن الفوري</p>
     </header>
 
     <!-- قسم التحقق وتأكيد البريد -->
@@ -252,10 +311,9 @@
             </div>
             <button class="btn" onclick="sendOTP()">إرسال رمز التحقق OTP</button>
 
-            <!-- التنبيه للمستخدم بخط عريض وكبير -->
             <div class="spam-warning">
                 ⚠️ تنبيه مهم جداً: <br>
-                إذا لم تجد الرمز في صندوق الوارد، يرجى فحص مجلد <b>الرسائل غير المرغوب فيها (Spam / Junk)</b> في بريدك الإلكتروني!
+                إذا لم تجد الرمز في صندوق الوارد، يرجى فحص مجلد <b>الرسائل غير المرغوب فيها (Spam / Junk)</b>!
             </div>
         </div>
 
@@ -268,131 +326,110 @@
         </div>
 
         <div id="statusMessage" class="status-msg"></div>
+
+        <div class="signature">
+            مـ؏ ﺗـﺣـﻳـﺎﺗـي ⊱ ﻣـﺎﻟـگ ⊰
+        </div>
     </div>
 
-    <!-- متجر البطاقات الرقمية الكامل -->
+    <!-- المحتوى الرئيسي بعد التوثيق -->
     <div id="storeContent" class="hidden">
 
-        <!-- قسم ببجي موبايل -->
+        <!-- شريط المحفظة الشغال -->
+        <div class="wallet-bar">
+            <div class="wallet-info">
+                رصيد المحفظة الحالي: <span id="walletBalance">$0.00</span>
+            </div>
+            <button class="btn-charge" onclick="openChargeWallet()">+ شحن المحفظة</button>
+        </div>
+
+        <!-- ببجي -->
         <h2 class="section-title">🔥 شدات ببجي موبايل (PUBG Mobile UC)</h2>
         <div class="cards-grid">
             <div class="card-item">
+                <img src="https://img.utdstc.com/icon/417/360/4173602148ed382c49a37ad9e7769996d99763c3298fa63b2f56be87994b70db:200" class="card-img" alt="PUBG 60">
                 <h3>60 شدة UC</h3>
-                <p>شحن عن طريق الايدي ID</p>
+                <p>شحن عن طريق الأيدي ID</p>
                 <div class="card-price">$0.99</div>
-                <button class="btn" onclick="openPayment('60 UC PUBG', '$0.99')">شراء الآن</button>
+                <button class="btn" onclick="openPayment('60 UC PUBG', 0.99)">شراء الآن</button>
             </div>
             <div class="card-item">
+                <img src="https://img.utdstc.com/icon/417/360/4173602148ed382c49a37ad9e7769996d99763c3298fa63b2f56be87994b70db:200" class="card-img" alt="PUBG 325">
                 <h3>325 شدة UC</h3>
-                <p>شحن عن طريق الايدي ID</p>
+                <p>شحن عن طريق الأيدي ID</p>
                 <div class="card-price">$4.99</div>
-                <button class="btn" onclick="openPayment('325 UC PUBG', '$4.99')">شراء الآن</button>
+                <button class="btn" onclick="openPayment('325 UC PUBG', 4.99)">شراء الآن</button>
             </div>
             <div class="card-item">
+                <img src="https://img.utdstc.com/icon/417/360/4173602148ed382c49a37ad9e7769996d99763c3298fa63b2f56be87994b70db:200" class="card-img" alt="PUBG 660">
                 <h3>660 شدة UC</h3>
-                <p>شحن عن طريق الايدي ID</p>
+                <p>شحن عن طريق الأيدي ID</p>
                 <div class="card-price">$9.99</div>
-                <button class="btn" onclick="openPayment('660 UC PUBG', '$9.99')">شراء الآن</button>
+                <button class="btn" onclick="openPayment('660 UC PUBG', 9.99)">شراء الآن</button>
             </div>
             <div class="card-item">
+                <img src="https://img.utdstc.com/icon/417/360/4173602148ed382c49a37ad9e7769996d99763c3298fa63b2f56be87994b70db:200" class="card-img" alt="PUBG 1800">
                 <h3>1800 شدة UC</h3>
-                <p>شحن عن طريق الايدي ID</p>
+                <p>شحن عن طريق الأيدي ID</p>
                 <div class="card-price">$24.99</div>
-                <button class="btn" onclick="openPayment('1800 UC PUBG', '$24.99')">شراء الآن</button>
-            </div>
-            <div class="card-item">
-                <h3>3850 شدة UC</h3>
-                <p>شحن عن طريق الايدي ID</p>
-                <div class="card-price">$49.99</div>
-                <button class="btn" onclick="openPayment('3850 UC PUBG', '$49.99')">شراء الآن</button>
-            </div>
-            <div class="card-item">
-                <h3>8100 شدة UC</h3>
-                <p>شحن عن طريق الايدي ID</p>
-                <div class="card-price">$99.99</div>
-                <button class="btn" onclick="openPayment('8100 UC PUBG', '$99.99')">شراء الآن</button>
+                <button class="btn" onclick="openPayment('1800 UC PUBG', 24.99)">شراء الآن</button>
             </div>
         </div>
 
-        <!-- قسم البطاقات البنكية والفيزا -->
-        <h2 class="section-title">💳 بطاقات الفيزا والماستركارد (Virtual Visa/Mastercard)</h2>
+        <!-- الفيزا -->
+        <h2 class="section-title">💳 بطاقات الفيزا والماستركارد</h2>
         <div class="cards-grid">
             <div class="card-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png" class="card-img" alt="Visa $5">
                 <h3>بطاقة فيزا افتراضية $5</h3>
-                <p>مقبولة لتفعيل الاشتراكات والمتاجر</p>
+                <p>تفعيل ومشتريات أونلاين</p>
                 <div class="card-price">$6.50</div>
-                <button class="btn" onclick="openPayment('Visa Virtual $5', '$6.50')">شراء الآن</button>
+                <button class="btn" onclick="openPayment('Visa Virtual $5', 6.50)">شراء الآن</button>
             </div>
             <div class="card-item">
-                <h3>بطاقة فيزا افتراضية $10</h3>
-                <p>تفعيل كامل للشراء أونلاين</p>
-                <div class="card-price">$12.00</div>
-                <button class="btn" onclick="openPayment('Visa Virtual $10', '$12.00')">شراء الآن</button>
-            </div>
-            <div class="card-item">
-                <h3>بطاقة ماستركارد مشحونة $25</h3>
-                <p>صلاحية استخدام عالمية</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1200px-Mastercard-logo.svg.png" class="card-img" alt="Mastercard $25">
+                <h3>ماستركارد مشحونة $25</h3>
+                <p>صلاحية عالمية كاملة</p>
                 <div class="card-price">$28.00</div>
-                <button class="btn" onclick="openPayment('Mastercard $25', '$28.00')">شراء الآن</button>
+                <button class="btn" onclick="openPayment('Mastercard $25', 28.00)">شراء الآن</button>
             </div>
         </div>
 
-        <!-- قسم جواهر فري فاير -->
-        <h2 class="section-title">💎 جواهر فري فاير (Free Fire Gems)</h2>
+        <!-- فري فاير -->
+        <h2 class="section-title">💎 جواهر فري فاير</h2>
         <div class="cards-grid">
             <div class="card-item">
+                <img src="https://play-lh.googleusercontent.com/WW43zUsp6C7bF6XwRpxH2w3E9C1JpP6l9sXQ8h8K41zR=w240-h380" class="card-img" alt="FF 110">
                 <h3>110 جوهرة</h3>
-                <p>100 + 10 مجاناً</p>
+                <p>شحن عبر المعرف ID</p>
                 <div class="card-price">$1.00</div>
-                <button class="btn" onclick="openPayment('Free Fire 110 Gems', '$1.00')">شراء الآن</button>
+                <button class="btn" onclick="openPayment('Free Fire 110 Gems', 1.00)">شراء الآن</button>
             </div>
             <div class="card-item">
+                <img src="https://play-lh.googleusercontent.com/WW43zUsp6C7bF6XwRpxH2w3E9C1JpP6l9sXQ8h8K41zR=w240-h380" class="card-img" alt="FF 583">
                 <h3>583 جوهرة</h3>
-                <p>530 + 53 مجاناً</p>
+                <p>شحن عبر المعرف ID</p>
                 <div class="card-price">$5.00</div>
-                <button class="btn" onclick="openPayment('Free Fire 583 Gems', '$5.00')">شراء الآن</button>
-            </div>
-            <div class="card-item">
-                <h3>2420 جوهرة</h3>
-                <p>2200 + 220 مجاناً</p>
-                <div class="card-price">$20.00</div>
-                <button class="btn" onclick="openPayment('Free Fire 2420 Gems', '$20.00')">شراء الآن</button>
+                <button class="btn" onclick="openPayment('Free Fire 583 Gems', 5.00)">شراء الآن</button>
             </div>
         </div>
 
-        <!-- قسم بطاقات المتاجر -->
-        <h2 class="section-title">🎮 بطاقات المتاجر والألعاب العالمية</h2>
-        <div class="cards-grid">
-            <div class="card-item">
-                <h3>بطاقة iTunes $10</h3>
-                <p>متجر أبل أمريكي</p>
-                <div class="card-price">$10.00</div>
-                <button class="btn" onclick="openPayment('iTunes $10', '$10.00')">شراء الآن</button>
+        <footer>
+            <div class="signature">
+                مـ؏ ﺗـﺣـﻳـﺎﺗـي ⊱ ﻣـﺎﻟـگ ⊰
             </div>
-            <div class="card-item">
-                <h3>بطاقة Google Play $10</h3>
-                <p>متجر جوجل أمريكي</p>
-                <div class="card-price">$10.00</div>
-                <button class="btn" onclick="openPayment('Google Play $10', '$10.00')">شراء الآن</button>
-            </div>
-            <div class="card-item">
-                <h3>بطاقة PlayStation $20</h3>
-                <p>حساب ستور أمريكي</p>
-                <div class="card-price">$20.00</div>
-                <button class="btn" onclick="openPayment('PlayStation $20', '$20.00')">شراء الآن</button>
-            </div>
-        </div>
+        </footer>
 
     </div>
 </div>
 
-<!-- نافذة خيارات الدفع Modal -->
+<!-- نافذة الشراء والمحفظة Modal -->
 <div id="paymentModal" class="modal-overlay hidden">
     <div class="modal-content">
-        <h3 id="modalItemName">اختيار طريقة الدفع</h3>
-        <p style="text-align: center; color: var(--success-color); font-weight: bold;" id="modalItemPrice"></p>
-        <p style="text-align: center; color: var(--text-muted);">اختر طريقة الدفع المناسبة لك لإتمام الطلب:</p>
+        <h3 id="modalItemName">خيارات الدفع</h3>
+        <p style="text-align: center; color: var(--success-color); font-weight: bold; font-size: 1.2rem;" id="modalItemPrice"></p>
         
+        <div class="payment-option" onclick="payWithWallet()">👛 الدفع بواسطة المحفظة</div>
         <div class="payment-option" onclick="processPayment('Visa/Mastercard')">💳 بطاقة فيزا / ماستركارد</div>
         <div class="payment-option" onclick="processPayment('USDT Crypto')">🪙 عملات رقمية (USDT TRC20)</div>
         <div class="payment-option" onclick="processPayment('WhatsApp Direct')">💬 الدفع المباشر عبر الواتساب</div>
@@ -404,7 +441,21 @@
 <script>
     let generatedOTP = null;
     let selectedItem = '';
-    let selectedPrice = '';
+    let selectedPrice = 0;
+    let walletBalance = 0.00;
+
+    function updateWalletUI() {
+        document.getElementById('walletBalance').innerText = '$' + walletBalance.toFixed(2);
+    }
+
+    function openChargeWallet() {
+        let amount = prompt("أدخل المبلغ الذي تريد شحنه في المحفظة ($):", "10");
+        if (amount && !isNaN(amount) && parseFloat(amount) > 0) {
+            walletBalance += parseFloat(amount);
+            updateWalletUI();
+            alert("تم شحن محفظتك بمبلغ $" + parseFloat(amount).toFixed(2) + " بنجاح!");
+        }
+    }
 
     function showStatus(msg, isError = false) {
         const statusEl = document.getElementById('statusMessage');
@@ -458,7 +509,7 @@
         selectedItem = itemName;
         selectedPrice = price;
         document.getElementById('modalItemName').innerText = 'شراء: ' + itemName;
-        document.getElementById('modalItemPrice').innerText = 'السعر: ' + price;
+        document.getElementById('modalItemPrice').innerText = 'السعر: $' + price.toFixed(2);
         document.getElementById('paymentModal').classList.remove('hidden');
     }
 
@@ -466,9 +517,23 @@
         document.getElementById('paymentModal').classList.add('hidden');
     }
 
+    function payWithWallet() {
+        if (walletBalance >= selectedPrice) {
+            walletBalance -= selectedPrice;
+            updateWalletUI();
+            alert('تم الخصم من المحفظة بنجاح! تم شراء ' + selectedItem + ' وستصلك التفاصيل فوراً.');
+            closePayment();
+        } else {
+            alert('رصيد المحفظة غير كافٍ! يرجى شحن المحفظة أولاً.');
+        }
+    }
+
     function processPayment(method) {
-        alert('تم اختيار طريقة الدفع: (' + method + ') لـ ' + selectedItem + ' بسعر ' + selectedPrice + '\nسيتم تحويلك لإتمام العملية وتأكيد الشحن.');
-        closePayment();
+        let playerID = prompt("يرجى إدخال الآيدي (ID) أو البريد لاستلام الطلب:");
+        if (playerID) {
+            alert('تم تقديم طلبك بنجاح عبر (' + method + ') لـ ' + selectedItem + '\nتم ربط الطلب بالمعرف: ' + playerID);
+            closePayment();
+        }
     }
 </script>
 
