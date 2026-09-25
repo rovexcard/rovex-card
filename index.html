@@ -3,397 +3,668 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROVEX CARD | متجر البطاقات الرقمية المحترف</title>
-    <link rel="stylesheet" href="style.css">
+    <title>ROVEX CARD | Elite Digital Store</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-color: #0f1015;
-            --card-bg: #181924;
+            --bg-main: #07090e;
+            --bg-card: rgba(21, 25, 38, 0.7);
             --accent-gold: #f0b90b;
-            --accent-green: #2ed573;
+            --accent-cyan: #00f2fe;
+            --accent-purple: #7928ca;
+            --accent-green: #00e676;
             --text-main: #ffffff;
-            --text-sub: #a0a5b5;
+            --text-muted: #8e9aaf;
+            --border-glow: rgba(0, 242, 254, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            user-select: none;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-main);
             color: var(--text-main);
-            font-family: 'Tajawal', sans-serif;
-            margin: 0;
-            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.12) 0%, transparent 40%);
         }
 
-        /* الهيدر العلوي والمحفظة */
-        .top-bar {
-            background: #12131c;
+        /* Top Navigation Header */
+        .navbar {
+            background: rgba(11, 14, 23, 0.85);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .user-wallet {
+        .brand-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: rgba(240, 185, 11, 0.1);
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(240, 185, 11, 0.3);
-        }
-
-        .wallet-amount {
-            color: var(--accent-gold);
-            font-weight: 900;
-        }
-
-        .btn-topup {
-            background: var(--accent-gold);
-            color: #000;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 0.8rem;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-
-        .btn-topup:hover {
-            opacity: 0.9;
-        }
-
-        /* رأس الصفحة والملاحظات */
-        .header-main {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .brand-logo {
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-            color: var(--text-main);
-        }
-
-        .brand-logo span {
-            color: var(--accent-gold);
-        }
-
-        .search-box {
-            max-width: 500px;
-            margin: 15px auto;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px 20px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: var(--card-bg);
-            color: #fff;
-            font-family: inherit;
-            box-sizing: border-box;
-        }
-
-        /* أقسام الأقسام الكبيرة (Tabs) */
-        .categories-wrapper {
-            display: flex;
-            justify-content: center;
             gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-            padding: 0 10px;
-        }
-
-        .cat-btn {
-            background: var(--card-bg);
-            color: var(--text-sub);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 10px 20px;
-            border-radius: 12px;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.25s ease;
-            font-family: inherit;
         }
 
-        .cat-btn.active, .cat-btn:hover {
-            background: var(--accent-gold);
-            color: #000;
-            border-color: var(--accent-gold);
+        .brand-logo i {
+            color: var(--accent-cyan);
+            -webkit-text-fill-color: initial;
+            filter: drop-shadow(0 0 10px var(--accent-cyan));
         }
 
-        /* شبكة الكروت المصغرة والمركزة */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        .nav-actions {
+            display: flex;
+            align-items: center;
             gap: 15px;
-            padding: 20px;
-            max-width: 1200px;
+        }
+
+        .wallet-pill {
+            background: rgba(240, 185, 11, 0.08);
+            border: 1px solid rgba(240, 185, 11, 0.3);
+            border-radius: 30px;
+            padding: 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 0 15px rgba(240, 185, 11, 0.1);
+        }
+
+        .wallet-pill .amount {
+            color: var(--accent-gold);
+            font-size: 1.05rem;
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, var(--accent-cyan), #0072ff);
+            color: #000;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+        }
+
+        .btn-cart {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff0055;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Hero Banner */
+        .hero-section {
+            padding: 40px 20px 20px;
+            text-align: center;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .card-item {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 12px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, #fff, #a0a5b5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-title span {
+            background: linear-gradient(90deg, var(--accent-gold), #ff9f1a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gateways-badge {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Search & Filters */
+        .controls-container {
+            max-width: 1200px;
+            margin: 30px auto 10px;
+            padding: 0 20px;
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 14px 48px 14px 20px;
+            background: rgba(18, 22, 34, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-wrapper input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .categories-grid {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cat-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 22px;
+            border-radius: 14px;
+            color: var(--text-muted);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .cat-chip.active, .cat-chip:hover {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(121, 40, 202, 0.15));
+            border-color: var(--accent-cyan);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Products Display */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 16px;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .card-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            border-color: rgba(240, 185, 11, 0.4);
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 242, 254, 0.15);
         }
 
-        .card-badge {
+        .tag-status {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #ff4757;
-            color: white;
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-weight: bold;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 230, 118, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 230, 118, 0.3);
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 0.68rem;
+            font-weight: 800;
         }
 
-        .card-img-container {
+        .img-wrapper {
             width: 100%;
-            height: 110px;
-            margin-bottom: 8px;
+            height: 130px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(0,0,0,0.2);
+            margin-bottom: 12px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 14px;
+            padding: 10px;
         }
 
-        .card-img-container img {
+        .img-wrapper img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0px 5px 8px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
         }
 
-        .card-title {
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin: 6px 0;
-            color: var(--text-main);
-            line-height: 1.2;
+        .p-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 6px;
         }
 
-        .card-price {
-            color: var(--accent-green);
+        .p-price {
+            font-size: 1.15rem;
             font-weight: 900;
-            font-size: 1rem;
-            margin: 4px 0 10px 0;
+            color: var(--accent-gold);
+            margin-bottom: 14px;
         }
 
-        .btn-buy-now {
-            background: linear-gradient(45deg, #f0b90b, #ff9f1a);
+        .btn-buy {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .btn-buy:hover {
+            background: var(--accent-gold);
             color: #000;
-            text-decoration: none;
-            padding: 8px 0;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 0.8rem;
-            display: block;
-            transition: opacity 0.2s;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(240, 185, 11, 0.4);
         }
 
-        .btn-buy-now:hover {
-            opacity: 0.9;
+        /* Login & Deposit Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
         }
 
-        footer {
-            text-align: center;
+        .modal-box {
+            background: #11141e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
             padding: 30px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            color: var(--text-sub);
-            font-size: 0.8rem;
-            margin-top: 40px;
+            width: 90%;
+            max-width: 420px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .qr-box {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 16px;
+            margin: 15px 0;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+
+        .qr-box img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 60px;
+            background: rgba(5, 7, 12, 0.95);
         }
     </style>
 </head>
 <body>
 
-    <!-- الشريط العلوي: رصيد المحفظة وتسجيل الدخول -->
-    <div class="top-bar">
-        <div class="user-wallet">
-            <span>💳 المحفظة:</span>
-            <span class="wallet-amount">0.00 USDT</span>
-            <a href="#" class="btn-topup">+ شحن</a>
+    <!-- Header / Nav -->
+    <nav class="navbar">
+        <div class="brand-logo" onclick="window.location.reload()">
+            <i class="fa-solid fa-bolt"></i> ROVEX CARD
         </div>
-        <div style="font-size: 0.8rem; color: #888;">
-            تسليم آلي 24/7 ⚡
-        </div>
-    </div>
 
-    <!-- الهيدر والبحث -->
-    <div class="header-main">
-        <div class="brand-logo">ROVEX <span>CARD</span></div>
-        <p style="color: var(--text-sub); font-size: 0.85rem;">متجرك الموثوق للبطاقات الرقمية والألعاب فوراً</p>
+        <div class="nav-actions">
+            <div class="wallet-pill">
+                <i class="fa-solid fa-wallet" style="color: var(--accent-gold);"></i>
+                <span>الرصيد:</span>
+                <span class="amount" id="user-balance">0.00 USDT</span>
+            </div>
+
+            <button class="btn-action" onclick="openModal('deposit-modal')">
+                <i class="fa-solid fa-plus"></i> شحن
+            </button>
+
+            <button class="btn-action" style="background: rgba(255,255,255,0.08); color: #fff;" onclick="openModal('login-modal')">
+                <i class="fa-solid fa-user"></i> دخول
+            </button>
+
+            <div class="btn-cart" onclick="alert('سلة المشتريات فارغة حالياً')">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title">المنصة الأحدث لبيع <span>البطاقات الرقمية</span></h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">تسليم فوري 24/7 لأكواد الشحن، الفيزا الافتراضية، والألعاب بأقل الأسعار.</p>
         
-        <div class="search-box">
-            <input type="text" placeholder="ابحث عن بطاقة، لعبة، أو خدمة...">
+        <div class="gateways-badge">
+            <div class="badge-item"><i class="fa-solid fa-shield-halved" style="color: var(--accent-green);"></i> تشفير كامل</div>
+            <div class="badge-item"><i class="fa-solid fa-bolt" style="color: var(--accent-gold);"></i> تسليم تلقائي</div>
+            <div class="badge-item"><i class="fa-brands fa-bitcoin" style="color: #f7931a;"></i> Binance Pay</div>
+            <div class="badge-item"><i class="fa-solid fa-coins" style="color: #ffb11a;"></i> Bybit UID</div>
+        </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <div class="controls-container">
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="ابحث عن بطاقة، لعبة، أو خدمة (مثال: فيزا، ببجي)...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="categories-grid">
+            <div class="cat-chip active" onclick="filterCategory('all', this)"><i class="fa-solid fa-border-all"></i> الكل</div>
+            <div class="cat-chip" onclick="filterCategory('visa', this)"><i class="fa-solid fa-credit-card"></i> بطاقات فيزا</div>
+            <div class="cat-chip" onclick="filterCategory('games', this)"><i class="fa-solid fa-gamepad"></i> الألعاب والستور</div>
+            <div class="cat-chip" onclick="filterCategory('subs', this)"><i class="fa-solid fa-tv"></i> الاشتراكات</div>
         </div>
     </div>
 
-    <!-- أقسام التصفح الرئيسية -->
-    <div class="categories-wrapper">
-        <button class="cat-btn active" onclick="filterCategory('all')">🌐 الكل</button>
-        <button class="cat-btn" onclick="filterCategory('visa')">💳 بطاقات فيزا</button>
-        <button class="cat-btn" onclick="filterCategory('games')">🎮 الألعاب والستور</button>
-        <button class="cat-btn" onclick="filterCategory('subs')">🎬 الاشتراكات والترفيه</button>
-    </div>
+    <!-- Products Grid -->
+    <main class="products-grid" id="productsGrid">
 
-    <!-- شبكة المنتجات -->
-    <div class="products-grid" id="products-container">
-
-        <!-- بطاقات الفيزا -->
-        <div class="card-item" data-cat="visa">
-            <span class="card-badge">تفعيل آلي</span>
-            <div class="card-img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa 10">
+        <!-- Visa $10 -->
+        <div class="product-card" data-cat="visa" data-name="فيزا 10">
+            <span class="tag-status">فوري ⚡</span>
+            <div class="img-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa">
             </div>
-            <div class="card-title">فيزا افتراضية 10$</div>
-            <div class="card-price">10.50 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
+            <div class="p-title">بطاقة فيزا افتراضية $10</div>
+            <div class="p-price">10.50 USDT</div>
+            <button class="btn-buy" onclick="handleBuy('فيزا 10$', 10.50)"><i class="fa-solid fa-bag-shopping"></i> شراء الآن</button>
         </div>
 
-        <div class="card-item" data-cat="visa">
-            <span class="card-badge">الأكثر طلباً</span>
-            <div class="card-img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa 25">
+        <!-- Visa $25 -->
+        <div class="product-card" data-cat="visa" data-name="فيزا 25">
+            <span class="tag-status">الأكثر طلباً</span>
+            <div class="img-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa">
             </div>
-            <div class="card-title">فيزا افتراضية 25$</div>
-            <div class="card-price">25.50 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
+            <div class="p-title">بطاقة فيزا افتراضية $25</div>
+            <div class="p-price">25.50 USDT</div>
+            <button class="btn-buy" onclick="handleBuy('فيزا 25$', 25.50)"><i class="fa-solid fa-bag-shopping"></i> شراء الآن</button>
         </div>
 
-        <div class="card-item" data-cat="visa">
-            <div class="card-img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa 50">
+        <!-- PlayStation $10 -->
+        <div class="product-card" data-cat="games" data-name="بلايستيشن 10">
+            <span class="tag-status">متوفر</span>
+            <div class="img-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation">
             </div>
-            <div class="card-title">فيزا افتراضية 50$</div>
-            <div class="card-price">50.00 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
+            <div class="p-title">بلايستيشن ستور $10 (US)</div>
+            <div class="p-price">10.00 USDT</div>
+            <button class="btn-buy" onclick="handleBuy('بلايستيشن 10$', 10.00)"><i class="fa-solid fa-bag-shopping"></i> شراء الآن</button>
         </div>
 
-        <!-- ألعاب وستور -->
-        <div class="card-item" data-cat="games">
-            <span class="card-badge">تسليم ⚡</span>
-            <div class="card-img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation 10">
+        <!-- PUBG 325 UC -->
+        <div class="product-card" data-cat="games" data-name="ببجي 325">
+            <span class="tag-status">شحن مباشر</span>
+            <div class="img-wrapper">
+                <img src="https://pngmania.com/wp-content/uploads/2023/02/pubg-mobile-logo.png" alt="PUBG">
             </div>
-            <div class="card-title">بلايستيشن ستور $10 (US)</div>
-            <div class="card-price">10.00 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
+            <div class="p-title">شدات ببجي موبايل (325 UC)</div>
+            <div class="p-price">5.00 USDT</div>
+            <button class="btn-buy" onclick="handleBuy('ببجي 325 UC', 5.00)"><i class="fa-solid fa-bag-shopping"></i> شراء الآن</button>
         </div>
 
-        <div class="card-item" data-cat="games">
-            <div class="card-img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation 25">
+        <!-- PUBG 660 UC -->
+        <div class="product-card" data-cat="games" data-name="ببجي 660">
+            <span class="tag-status">خصم</span>
+            <div class="img-wrapper">
+                <img src="https://pngmania.com/wp-content/uploads/2023/02/pubg-mobile-logo.png" alt="PUBG">
             </div>
-            <div class="card-title">بلايستيشن ستور $25 (US)</div>
-            <div class="card-price">25.00 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
+            <div class="p-title">شدات ببجي موبايل (660 UC)</div>
+            <div class="p-price">9.80 USDT</div>
+            <button class="btn-buy" onclick="handleBuy('ببجي 660 UC', 9.80)"><i class="fa-solid fa-bag-shopping"></i> شراء الآن</button>
         </div>
 
-        <div class="card-item" data-cat="games">
-            <span class="card-badge">شائع</span>
-            <div class="card-img-container">
-                <img src="https://pngmania.com/wp-content/uploads/2023/02/pubg-mobile-logo.png" alt="PUBG 325">
-            </div>
-            <div class="card-title">شدات ببجي 325 UC</div>
-            <div class="card-price">5.00 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
-        </div>
-
-        <div class="card-item" data-cat="games">
-            <div class="card-img-container">
-                <img src="https://pngmania.com/wp-content/uploads/2023/02/pubg-mobile-logo.png" alt="PUBG 660">
-            </div>
-            <div class="card-title">شدات ببجي 660 UC</div>
-            <div class="card-price">9.80 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
-        </div>
-
-        <div class="card-item" data-cat="games">
-            <div class="card-img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Free_Fire_logo.png" alt="Free Fire">
-            </div>
-            <div class="card-title">فري فاير 530 جوهرة</div>
-            <div class="card-price">5.20 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
-        </div>
-
-        <!-- الاشتراكات -->
-        <div class="card-item" data-cat="subs">
-            <span class="card-badge">خصم</span>
-            <div class="card-img-container">
+        <!-- Netflix -->
+        <div class="product-card" data-cat="subs" data-name="نيتفليكس">
+            <span class="tag-status">رسمي</span>
+            <div class="img-wrapper">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
             </div>
-            <div class="card-title">بطاقة نيتفليكس $25</div>
-            <div class="card-price">24.50 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
+            <div class="p-title">اشتراك نيتفليكس $25</div>
+            <div class="p-price">24.50 USDT</div>
+            <button class="btn-buy" onclick="handleBuy('نيتفليكس 25$', 24.50)"><i class="fa-solid fa-bag-shopping"></i> شراء الآن</button>
         </div>
 
-        <div class="card-item" data-cat="subs">
-            <div class="card-img-container">
+        <!-- Apple Gift Card -->
+        <div class="product-card" data-cat="subs" data-name="ابل ايتونز">
+            <span class="tag-status">متوفر</span>
+            <div class="img-wrapper">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/ITunes_logo.svg" alt="iTunes">
             </div>
-            <div class="card-title">بطاقة أبل ستور $10 (US)</div>
-            <div class="card-price">10.00 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
+            <div class="p-title">بطاقة آبل ستور $10 (US)</div>
+            <div class="p-price">10.00 USDT</div>
+            <button class="btn-buy" onclick="handleBuy('آبل ستور 10$', 10.00)"><i class="fa-solid fa-bag-shopping"></i> شراء الآن</button>
         </div>
 
-        <div class="card-item" data-cat="subs">
-            <div class="card-img-container">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_2022_logo.svg" alt="Google Play">
+        <!-- Free Fire -->
+        <div class="product-card" data-cat="games" data-name="فري فاير">
+            <span class="tag-status">فوري</span>
+            <div class="img-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Free_Fire_logo.png" alt="Free Fire">
             </div>
-            <div class="card-title">جوجل بلاي $10 (US)</div>
-            <div class="card-price">10.00 USDT</div>
-            <a href="#" class="btn-buy-now">شراء فوراً</a>
+            <div class="p-title">فري فاير (530 جوهرة)</div>
+            <div class="p-price">5.20 USDT</div>
+            <button class="btn-buy" onclick="handleBuy('فري فاير 530 جوهرة', 5.20)"><i class="fa-solid fa-bag-shopping"></i> شراء الآن</button>
         </div>
 
+    </main>
+
+    <!-- Modal: Login -->
+    <div class="modal-overlay" id="login-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('login-modal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-title">تسجيل الدخول</div>
+            <input type="email" class="form-input" placeholder="البريد الإلكتروني">
+            <input type="password" class="form-input" placeholder="كلمة المرور">
+            <button class="btn-action" style="width: 100%; padding: 12px; justify-content: center;" onclick="alert('تم تسجيل الدخول بنجاح'); closeModal('login-modal');">دخول</button>
+        </div>
     </div>
 
-    <!-- الفوتر -->
+    <!-- Modal: Deposit -->
+    <div class="modal-overlay" id="deposit-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('deposit-modal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-title">إيداع رصيد (USDT)</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center;">قم بالتحويل إلى أحد الحسابات التالية وسيتم إضافة الرصيد لحسابك:</p>
+            
+            <div class="qr-box">
+                <p style="color: var(--accent-gold); font-weight: bold; margin-bottom: 5px;">🟡 Binance Pay ID</p>
+                <p style="font-size: 1.1rem; font-weight: 900; letter-spacing: 1px;">1270138643</p>
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
+                <p style="color: #ffb11a; font-weight: bold; margin-bottom: 5px;">🖤 Bybit UID</p>
+                <p style="font-size: 1.1rem; font-weight: 900; letter-spacing: 1px;">558573961</p>
+            </div>
+            
+            <button class="btn-action" style="width: 100%; padding: 12px; justify-content: center; background: var(--accent-green);" onclick="alert('تم إرسال طلب الشحن للمراجعة الفورية.'); closeModal('deposit-modal');">تأكيد التحويل</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2026 ROVEX CARD - منصة البطاقات الرقمية الأولى</p>
-        <p style="margin-top: 5px;">مدعوم بنظام المحفظة والدفع الآلي عبر USDT (Binance Pay & Bybit)</p>
+        <p>© 2026 ROVEX CARD. جميع الحقوق محفوظة.</p>
+        <p style="margin-top: 6px; color: #555;">النظام العالمي للبطاقات والخدمات الرقمية المشفرة.</p>
     </footer>
 
-    <!-- سكربت بسيط لفلترة الأقسام فوراً بدون إعادة تحميل الصفحة -->
+    <!-- Scripts -->
     <script>
-        function filterCategory(cat) {
-            const buttons = document.querySelectorAll('.cat-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        function filterCategory(cat, element) {
+            document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
 
-            const items = document.querySelectorAll('.card-item');
-            items.forEach(item => {
-                if (cat === 'all' || item.getAttribute('data-cat') === cat) {
-                    item.style.display = 'flex';
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if(cat === 'all' || card.getAttribute('data-cat') === cat) {
+                    card.style.display = 'flex';
                 } else {
-                    item.style.display = 'none';
+                    card.style.display = 'none';
                 }
             });
+        }
+
+        function searchProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.product-card');
+
+            cards.forEach(card => {
+                let name = card.getAttribute('data-name').toLowerCase();
+                if(name.includes(input)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function handleBuy(productName, price) {
+            openModal('deposit-modal');
         }
     </script>
 </body>
